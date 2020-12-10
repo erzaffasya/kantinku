@@ -19,8 +19,8 @@ class Transaksi extends Migration
             $table->foreignId('produk_id')->constrained('produk');
             $table->integer('jumlah');
             $table->integer('total_harga');
-            $table->date('tgl_pembelian');
-            $table->enum('jenis_kelamin', ['Sudah Bayar', 'Belum Bayar']);
+            $table->enum('status', ['Sudah Bayar', 'Belum Bayar']);
+            $table->timestamps();
         });
     }
 

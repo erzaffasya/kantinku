@@ -20,6 +20,7 @@ class Produk extends Migration
             $table->integer('harga');
             $table->integer('stok');
             $table->foreignId('penjual_id')->constrained('penjual');
+            $table->timestamps();
         });
     }
 
