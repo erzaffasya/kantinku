@@ -93,15 +93,17 @@ class ProdukController extends Controller
     {
         $request->validate([
             'nama'=>'required',
-            'nim' => 'required',
-            'alamat'=>'required',
-            'programStudi' => 'required'
+            'harga' => 'required',
+            'stok'=>'required',
+            'penjual_id' => 'required',
+            'foto' => 'required'
         ]);
         $produk = Produk::find($id);
         $produk->nama = $request->get('nama');
-        $produk->nim = $request->get('nim');
-        $produk->alamat = $request->get('alamat');
-        $produk->programStudi = $request->get('programStudi');
+        $produk->harga = $request->get('harga');
+        $produk->stok = $request->get('stok');
+        $produk->penjual_id = $request->get('penjual_id');
+        $produk->foto = $request->get('foto');
         $produk->save();
 
         return redirect()->route('produk.index')

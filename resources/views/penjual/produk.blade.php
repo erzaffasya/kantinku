@@ -32,7 +32,7 @@
                 <th>Nama</th>
                 <th>Harga</th>
                 <th>Stok</th>
-                {{-- <th>Penjual</th> --}}
+                <th>Penjual</th>
                 <th>Foto</th>
                 <th>Action</th>
               </tr>

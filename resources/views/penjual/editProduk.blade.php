@@ -4,7 +4,7 @@
 <div class="card">
   <form method="post" action="{{route('produk.update',$produk->id)}}">
     @csrf
-    @csrf('PUT')
+    @method('PUT')
   <div class="card-header">
     <h4>Form Produk</h4>
   </div>
