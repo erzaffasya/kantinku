@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Route::get('/', function () {
 
 Route::resource('buyer', BuyerController::class);
 Route::resource('produk', ProdukController::class);
+Route::resource('Transaksi', TransaksiController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
