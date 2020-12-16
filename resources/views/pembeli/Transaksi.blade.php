@@ -39,10 +39,10 @@
               @foreach ($Transaksi as $tsk)
               <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{$tsk->pembeli_id}}</td>
-                <td>{{$tsk->produk_id}}</td>
+                <td>{{$tsk->nama}}</td>
+                <td>{{$tsk->produks}}</td>
                 <td>{{$tsk->jumlah}}</td>
-                <td>{{$tsk->total_harga}}</td>
+                <td>{{$tsk->}}</td>
                 <td>{{$tsk->status}}</td>
                 {{-- <td>
                   <div class="badge badge-success">Active</div>

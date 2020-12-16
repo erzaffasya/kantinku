@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
+use App\Models\Produk;
 
 
 class TransaksiController extends Controller
@@ -18,7 +16,21 @@ class TransaksiController extends Controller
 
     public function index()
     {
-        $Transaksi = Transaksi::orderBy('id','asc')->paginate(5);
+        $Transaksi = Transaksi::select(
+            'transaksi.id',
+            'transaksi.pembeli_id',
+            'transaksi.produk_id',
+            'transaksi.jumlah',
+            'transaksi.total_harga',
+            'transaksi.status',
+            'pembeli.nama as nama',
+            'produk.nama as produks',
+            // 'produk.harga*transaksi.jumlah AS total',
+
+        )->join('pembeli','pembeli.id','=','transaksi.pembeli_id')
+        ->join('produk','produk.id','=','transaksi.produk_id')->get();
+            
+        // orderBy('id','asc')->paginate(5);
         return view('Pembeli.Transaksi',compact('Transaksi'))
                 ->with('i',(request()->input('page',1) -1)*5);
     }
@@ -30,7 +42,9 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        return view('Pembeli.createTransaksi');
+        $produk = Produk::select('*')->get();
+        // dd($produk);
+        return view('Pembeli.createTransaksi',compact('produk'));
     }
 
     /**
@@ -41,13 +55,16 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
+        $produk = Produk::find($request->produk_id);
+        $total=$request->jumlah;
         $Transaksi = Transaksi::create([
-            'nama' => $request->nama,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'Pembeli_id' => $request->Pembeli_id,
-            'foto'=>$request->foto,
+            'pembeli_id' => $request->pembeli_id,
+            'produk_id' => $request->produk_id,
+            'jumlah' => $request->jumlah,
+            'total_harga' => $produk->harga * $request->jumlah,
+            'status'=>$request->status,
         ]);
+        dd($Transaksi);
 
 
         
@@ -63,7 +80,12 @@ class TransaksiController extends Controller
      */
     public function show($id)
     {
-        $Transaksi = Transaksi::find($id);
+        $Transaksi = Transaksi::select(
+
+        )->join('nama tabel','tujuan_tabel','=','dari.asda')->
+        
+        
+        find($id);
 
         return view('Transaksi.detail-profile', compact('Transaksi'));
     }
@@ -120,7 +142,7 @@ class TransaksiController extends Controller
         $Transaksi = Transaksi::find($id);
         $Transaksi->delete();
 
-        return redirect()->route('Transaksi.index')
+        return redirect()->route('Transaksi.Transaksi')
                          ->with('success', 'Data Alumni berhasil dihapus');
     }
 }

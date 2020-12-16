@@ -2,7 +2,7 @@
 @section('body')
 
 <div class="card">
-  <form method="post" action="{{route('produk.store')}}">
+  <form method="post" action="{{route('Transaksi.store')}}">
     @csrf
   <div class="card-header">
     <h4>Form Produk</h4>
@@ -11,39 +11,30 @@
   <div class="card-body">
     <div class="form-group">
       <label>Nama</label>
-      <input type="text" name="nama" class="form-control">
-    </div>
-    
-    <div class="form-group">
-      <label>Stok</label>
-      <input type="text" name="stok" class="form-control">
+      <input type="text" name="pembeli_id" value="{{Auth::user()->name}}" class="form-control" disabled/>
+      <input type="hidden" name="pembeli_id" value="{{Auth::user()->name}}" >
     </div>
 
     <div class="form-group">
-      <label>Harga</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">
-            $
-          </div>
-        </div>
-        <input name="harga" type="text" class="form-control currency">
-      </div>
+      <label>Produk</label>
+      <select name='produk_id' class="form-control">
+        @foreach ($produk as $item)          
+          <option value="{{$item->id}}">{{$item->nama}}</option>
+        @endforeach
+      </select>
     </div>
-   
+        
     <div class="form-group">
-        <label>Penjual ID</label>
-        <input type="hidden" name="penjual_id" value="{{Auth::User()->id}}">
-        <input type="text" value="{{Auth::User()->id}}" class="form-control currency" disabled/>
+      <label>Jumlah</label>
+      <input type="text" name="jumlah" class="form-control">
     </div>
-  
 
     <div class="form-group">
-          <label>Foto Produk</label>
-          <input type="file" name="foto" class="form-control">
-        </div>
+      <label>Status</label>
+      <input type="text" name="status" value="Belum Bayar" class="form-control" disabled/>
+      <input type="hidden" name="status" value="Belum Bayar" class="form-control" disabled/>
     </div>
- 
+
     <div class="card-footer text-right">
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>

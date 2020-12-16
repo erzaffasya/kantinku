@@ -21,7 +21,7 @@ Route::get('/', function () {
 })->name('page');
 
 Route::resource('buyer', BuyerController::class);
-Route::resource('produk', ProdukController::class);
+Route::resource('produk', ProdukController::class)->shallow();
 Route::resource('Transaksi', TransaksiController::class);
 
 Route::get('/dashboard', function () {
