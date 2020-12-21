@@ -15,11 +15,17 @@ class ProdukController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index($id)
     {
-        $produk = Produk::orderBy('id','asc')->paginate(5);
+        $produk = Produk::where('penjual_id','=',$id)
+        
+        
+        ->orderBy('id','asc')->paginate(5);
+        // dd($produk,$id);
         return view('penjual.produk',compact('produk'))
                 ->with('i',(request()->input('page',1) -1)*5);
+
+        
     }
 
     /**
@@ -27,7 +33,7 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         return view('penjual.createProduk');
     }
@@ -66,7 +72,7 @@ class ProdukController extends Controller
 
 
         
-        return redirect()->route('produk.index')
+        return redirect()->route('seller.produk.index',Auth::user()->id)
                          ->with('success','Data berhasil ditambahkan');
     }
 
@@ -110,15 +116,26 @@ class ProdukController extends Controller
             'penjual_id' => 'required',
             'foto' => 'required'
         ]);
+
+//Pake get image gk?
+
+        if (isset($request->image)){
+            $extention = $request->image->extension();
+            $image_name = time().'.'.$extention;
+            $request->image->move(public_path('img\products'),$image_name);
+            
+        }else{
+            $image_name = null;
+        }
         $produk = Produk::find($id);
         $produk->nama = $request->get('nama');
         $produk->harga = $request->get('harga');
         $produk->stok = $request->get('stok');
         $produk->penjual_id = $request->get('penjual_id');
-        $produk->foto = $request->get('foto');
+        $produk->foto = $image_name;
         $produk->save();
 
-        return redirect()->route('produk.index')
+        return redirect()->route('seller.produk.index',Auth::user()->id)
                          ->with('success', 'Data berhasil diupdate');
     }
 
@@ -133,7 +150,7 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
         $produk->delete();
 
-        return redirect()->route('produk.index')
+        return redirect()->route('seller.produk.index',Auth::user()->id)
                          ->with('success', 'Data Alumni berhasil dihapus');
     }
 }

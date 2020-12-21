@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Models\buyer;
+use App\Models\User;
+use App\Models\Seller;
 
 
-
-class BuyerController extends Controller
+class SellerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +19,8 @@ class BuyerController extends Controller
 
     public function index()
     {
-        $buyer = buyer::orderBy('id','asc')->paginate(5);
-        return view('buyer.index',compact('buyer'))
+        $Seller = Seller::orderBy('id','asc')->paginate(5);
+        return view('admin.Seller',compact('Seller'))
                 ->with('i',(request()->input('page',1) -1)*5);
     }
 
@@ -31,7 +31,7 @@ class BuyerController extends Controller
      */
     public function create()
     {
-        return view('buyer.create-form');
+        return view('admin.createSeller');
     }
 
     /**
@@ -42,24 +42,40 @@ class BuyerController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama'=>'required',
+            'jenis_kelamin'=>'required',
+            'alamat' => 'required',
+            'nama_toko'=>'required',
+            //'gambarseller' => 'required|image|mimes:jpg,png,jpeg'
+        ]);
         if (isset($request->image)){
             $extention = $request->image->extension();
             $image_name = time().'.'.$extention;
-            $request->image->move(public_path('img\avatar'),$image_name);
+            $request->image->move(public_path('img\seller'),$image_name);
             
         }else{
             $image_name = null;
         }
 
-        $Buyer = buyer::create([
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
+        $user = User::create([
+            'name' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make("seller123"),
+            'role' => 'seller',
+        ]);
+        
+        $seller = Seller::create([
+            'id'=>$user->id,
+            'nama'=>$request->nama,
+            'jenis_kelamin'=>$request->jenis_kelamin,
             'alamat' => $request->alamat,
+            'nama_toko'=>$request->nama_toko,
             'foto' => $image_name,
-            'user_id' => $request->user_id,
+            'user_id'=>$user->id
+        ]);
 
-        ]);        
-        return redirect()->route('buyer.index')
+        return redirect()->route('admin.seller')
                          ->with('success','Data berhasil ditambahkan');
     }
 
@@ -71,9 +87,9 @@ class BuyerController extends Controller
      */
     public function show($id)
     {
-        $buyer = buyer::find($id);
+        $Seller = Seller::find($id);
 
-        return view('buyer.detail-profile', compact('buyer'));
+        return view('Seller.detail-profile', compact('Seller'));
     }
 
     /**
@@ -84,9 +100,9 @@ class BuyerController extends Controller
      */
     public function edit($id)
     {
-        $buyer = buyer::find($id);
+        $Seller = Seller::find($id);
 
-        return view('buyer.edit', compact('buyer'));
+        return view('admin.editSeller', compact('Seller'));
     }
 
     /**
@@ -102,28 +118,28 @@ class BuyerController extends Controller
             'nama'=>'required',
             'jenis_kelamin' => 'required',
             'alamat'=>'required',
-            'foto' => 'required',
-            'user_id' => 'required'
+            'nama_toko' => 'required',
+            'image' => 'required'
         ]);
 
         if (isset($request->image)){
             $extention = $request->image->extension();
             $image_name = time().'.'.$extention;
-            $request->image->move(public_path('img\avatar'),$image_name);
+            $request->image->move(public_path('img\seller'),$image_name);
             
         }else{
             $image_name = null;
         }
 
-        $buyer = buyer::find($id);
-        $buyer->nama = $request->get('nama');
-        $buyer->jenis_kelamin = $request->get('jenis_kelamin');
-        $buyer->alamat = $request->get('alamat');
-        $buyer->foto = $image_name;
-        $buyer->user_id = $request->get('user_id');
-        $buyer->save();
+        $Seller = Seller::find($id);
+        $Seller->nama = $request->get('nama');
+        $Seller->jenis_kelamin = $request->get('jenis_kelamin');
+        $Seller->alamat = $request->get('alamat');
+        $Seller->nama_toko = $request->get('nama_toko');
+        $Seller->foto = $image_name;
+        $Seller->save();
 
-        return redirect()->route('buyer.index')
+        return redirect()->route('Seller.index')
                          ->with('success', 'Data berhasil diupdate');
     }
 
@@ -135,10 +151,10 @@ class BuyerController extends Controller
      */
     public function destroy($id)
     {
-        $buyer = buyer::find($id);
-        $buyer->delete();
+        $Seller = Seller::find($id);
+        $Seller->delete();
 
-        return redirect()->route('buyer.index')
+        return redirect()->route('Seller.index')
                          ->with('success', 'Data Alumni berhasil dihapus');
     }
 }

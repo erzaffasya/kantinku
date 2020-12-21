@@ -5,6 +5,7 @@ use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,11 @@ Route::get('/', function () {
 })->name('page');
 
 Route::resource('Buyer', BuyerController::class);
-Route::resource('produk', ProdukController::class)->shallow();
+Route::resource('seller.produk', ProdukController::class)->shallow();
 Route::resource('Transaksi', TransaksiController::class);
 Route::resource('Seller', SellerController::class);
+Route::resource('Profile', SellerController::class);
+Route::resource('User', UserController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

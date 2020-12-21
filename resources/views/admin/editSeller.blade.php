@@ -34,7 +34,7 @@
       </div>
 
       <div class="form-group">
-        <label>Foto Produk</label>
+        <label>Foto Seller</label>
         <input type="file" name="image" class="form-control">
       </div>
   

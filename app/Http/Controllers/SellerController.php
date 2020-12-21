@@ -52,7 +52,7 @@ class SellerController extends Controller
         if (isset($request->image)){
             $extention = $request->image->extension();
             $image_name = time().'.'.$extention;
-            $request->image->move(public_path('img\seller'),$image_name);
+            $request->image->move(public_path('img\avatar'),$image_name);
             
         }else{
             $image_name = null;
@@ -125,7 +125,7 @@ class SellerController extends Controller
         if (isset($request->image)){
             $extention = $request->image->extension();
             $image_name = time().'.'.$extention;
-            $request->image->move(public_path('img\seller'),$image_name);
+            $request->image->move(public_path('img\avatar'),$image_name);
             
         }else{
             $image_name = null;

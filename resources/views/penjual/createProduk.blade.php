@@ -2,7 +2,7 @@
 
 @section('body')
 <div class="card">
-  <form method="post" action="{{route('produk.store')}}" enctype="multipart/form-data">
+  <form method="post" action="{{route('seller.produk.store',Auth::user()->id)}}" enctype="multipart/form-data">
     @csrf
   <div class="card-header">
     <h4>Form Produk</h4>

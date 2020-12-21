@@ -20,7 +20,7 @@
     <div class="card">
       <div class="card-header">
         <h4>
-        <a href="{{route('produk.create')}}">Product Table</a>
+        <a href="{{route('seller.produk.create',Auth::user()->id)}}">Product Table</a>
         </h4>
       </div>
       <div class="card-body">
@@ -32,7 +32,6 @@
                 <th>Nama</th>
                 <th>Harga</th>
                 <th>Stok</th>
-                <th>Penjual</th>
                 <th>Foto</th>
                 <th>Action</th>
               </tr>
@@ -42,7 +41,6 @@
                 <td>{{$prdk->nama}}</td>
                 <td>{{$prdk->harga}}</td>
                 <td>{{$prdk->stok}}</td>
-                <td>{{$prdk->penjual_id}}</td>
                 <td>
                   <div class="badge badge-success">Active</div>
                 </td>
@@ -60,7 +58,10 @@
           </table>
         </div>
       </div>
-      <div class="card-footer text-right">
+      <div class="card-footer text-center">
+          {{ ($produk->links()) }}
+      </div>
+      {{-- <div class="card-footer text-right">
         <nav class="d-inline-block">
           <ul class="pagination mb-0">
             <li class="page-item disabled">
@@ -76,7 +77,9 @@
             </li>
           </ul>
         </nav>
-      </div>
+      </div> --}}
+
+     
     </div>
   </div>
 </div>
