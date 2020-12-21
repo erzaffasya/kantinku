@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\SellerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,10 @@ Route::get('/', function () {
     return view('page');
 })->name('page');
 
-Route::resource('buyer', BuyerController::class);
+Route::resource('Buyer', BuyerController::class);
 Route::resource('produk', ProdukController::class)->shallow();
 Route::resource('Transaksi', TransaksiController::class);
+Route::resource('Seller', SellerController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

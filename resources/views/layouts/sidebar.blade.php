@@ -9,7 +9,7 @@
     <ul class="sidebar-menu">
       <li class="menu-header">Dashboard</li>
       <li class="nav-item dropdown active">
-        <a href="{{route('pembeliDashboard')}}" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+        <a href="{{route('page')}}" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
         <ul class="dropdown-menu">
           {{-- <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
           <li class="active"><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li> --}}
@@ -20,10 +20,16 @@
         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Form Input</span></a>
         <ul class="dropdown-menu">
 
-          @if ( Auth::user()->role === 'seller')
+          @if ( Auth::user()->role === 'buyer')
           <li><a class="nav-link" href="{{route('produk.create')}}">Produk</a></li>
-          @elseif ( Auth::user()->role === 'buyer')
+          <li><a class="nav-link" href="{{route('Seller.create')}}">Seller</a></li>
           <li><a class="nav-link" href="{{route('Transaksi.create')}}">Form Pemesanan</a></li>
+
+          @elseif ( Auth::user()->role === 'seller')
+          <li><a class="nav-link" href="{{route('produk.index')}}">Produk</a></li>
+
+          @elseif ( Auth::user()->role === 'admin')
+          <li><a class="nav-link" href="{{route('Seller.create')}}">Seller</a></li>
           @endif
           {{-- <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li> --}}
         </ul> 
@@ -34,11 +40,18 @@
         <ul class="dropdown-menu">
           {{-- <li><a class="nav-link" href="{{route('produk.index')}}">Produk</a></li> --}}
           
-          @if ( Auth::user()->role === 'seller')
-          <li><a class="nav-link" href="{{route('produk.index')}}">View Produk</a></li>      
-       
-          @elseif ( Auth::user()->role === 'buyer')             
+          @if ( Auth::user()->role === 'buyer')
+          <li><a class="nav-link" href="{{route('produk.index')}}">View Produk</a></li>   
+          <li><a class="nav-link" href="{{route('Seller.index')}}">View Seller</a></li>   
           <li><a class="nav-link" href="{{route('Transaksi.index')}}">View Transaksi</a></li>
+
+          @elseif ( Auth::user()->role === 'seller')             
+          <li><a class="nav-link" href="{{route('produk.create')}}">View Produk</a></li>   
+
+          @elseif ( Auth::user()->role === 'admin') 
+          <li><a class="nav-link" href="{{route('Transaksi.index')}}">View Transaksi</a></li>
+          <li><a class="nav-link" href="{{route('Seller.index')}}">View Seller</a></li> 
+          <li><a class="nav-link" href="#">View User</a></li>             
           @endif
  
           {{-- <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li> --}}

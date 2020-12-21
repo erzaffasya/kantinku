@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Model\Seller;
+use Illuminate\Support\Facades\Auth;
 
 
 class ProdukController extends Controller
@@ -42,12 +40,28 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama'=>'required',
+            'stok'=>'required',
+            'harga' => 'required',
+            'penjual_id' => 'required',
+            'image' => 'required'
+        ]);
+        if (isset($request->image)){
+            $extention = $request->image->extension();
+            $image_name = time().'.'.$extention;
+            $request->image->move(public_path('img\products'),$image_name);
+            
+        }else{
+            $image_name = null;
+        }
+
         $produk = Produk::create([
             'nama' => $request->nama,
             'harga' => $request->harga,
             'stok' => $request->stok,
             'penjual_id' => $request->penjual_id,
-            'foto'=>$request->foto,
+            'foto'=> $request->$image_name
         ]);
 
 
@@ -64,9 +78,7 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        $produk = Produk::find($id);
 
-        return view('produk.detail-profile', compact('produk'));
     }
 
     /**

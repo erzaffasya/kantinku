@@ -18,6 +18,10 @@ class Penjual extends Migration
             $table->string('nama',30);
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);
             $table->string('alamat',30);
+            $table->string('nama_toko',30);
+            $table->string('foto',255);
+            $table->foreignId('user_id')->constrained('users')->ondelete('cascade'); 
+            $table->timestamps();
         });
     }
 

@@ -1,8 +1,8 @@
 @extends('layouts.main')
-@section('body')
 
+@section('body')
 <div class="card">
-  <form method="post" action="{{route('produk.store')}}">
+  <form method="post" action="{{route('produk.store')}}" enctype="multipart/form-data">
     @csrf
   <div class="card-header">
     <h4>Form Produk</h4>
@@ -40,7 +40,7 @@
 
     <div class="form-group">
           <label>Foto Produk</label>
-          <input type="file" name="foto" class="form-control">
+          <input type="file" name="image" class="form-control">
         </div>
     </div>
  

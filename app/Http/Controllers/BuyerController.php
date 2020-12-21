@@ -46,6 +46,7 @@ class BuyerController extends Controller
             'nama' => $request->nama,
             'nim' => $request->nim,
             'alamat' => $request->alamat,
+            // 'foto' => $image_name,
             'programStudi' => $request->programStudi,
 
         ]);

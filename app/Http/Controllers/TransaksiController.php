@@ -21,7 +21,7 @@ class TransaksiController extends Controller
             'transaksi.pembeli_id',
             'transaksi.produk_id',
             'transaksi.jumlah',
-            'transaksi.total_harga',
+            // 'transaksi.total_harga',
             'transaksi.status',
             'pembeli.nama as nama',
             'produk.nama as produks',
@@ -61,7 +61,7 @@ class TransaksiController extends Controller
             'pembeli_id' => $request->pembeli_id,
             'produk_id' => $request->produk_id,
             'jumlah' => $request->jumlah,
-            'total_harga' => $produk->harga * $request->jumlah,
+            // 'total_harga' => $produk->harga * $request->jumlah,
             'status'=>$request->status,
         ]);
         dd($Transaksi);
