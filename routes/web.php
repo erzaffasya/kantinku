@@ -6,7 +6,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,9 +29,8 @@ Route::resource('Seller', SellerController::class);
 Route::resource('Profile', SellerController::class);
 Route::resource('User', UserController::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('dashboard/{id}', [DashboardController::class,'index'])
+    ->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 

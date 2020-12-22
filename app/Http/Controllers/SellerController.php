@@ -75,7 +75,7 @@ class SellerController extends Controller
             'user_id'=>$user->id
         ]);
 
-        return redirect()->route('admin.seller')
+        return redirect()->route('Seller.seller')
                          ->with('success','Data berhasil ditambahkan');
     }
 

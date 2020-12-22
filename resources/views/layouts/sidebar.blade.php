@@ -9,7 +9,7 @@
     <ul class="sidebar-menu">
       <li class="menu-header">Dashboard</li>
       <li class="nav-item dropdown">
-        <a href="{{route('dashboard')}}" class="nav-link">
+        <a href="{{route('dashboard',Auth::user()->id)}}" class="nav-link">
           <i class="fas fa-fire"></i>
           <span>Dashboard</span>
         </a>

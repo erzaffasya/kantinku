@@ -4,6 +4,8 @@
   <h1>Dashboard</h1>
 </div>
 <div class="row">
+
+  <!-- KOTAK PALING KIRI -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="card card-statistic-1">
       <div class="card-icon bg-primary">
@@ -11,14 +13,29 @@
       </div>
       <div class="card-wrap">
         <div class="card-header">
-          <h4>Total Admin</h4>
+          @if (Auth::user()->role === 'admin')
+          <h4>Total Users</h4>
+          @elseif (Auth::user()->role === 'seller')
+          <h4>Total Produk</h4>
+          @elseif (Auth::user()->role === 'buyer')
+          <h4>Total Transaksi</h4>
+          @endif          
         </div>
+
         <div class="card-body">
-          10
+          @if (Auth::user()->role === 'admin')
+          <h4>{{($user->count())}}</h4>
+          @elseif (Auth::user()->role === 'seller')
+          <h4>{{($produk->count())}}</h4>
+          @elseif (Auth::user()->role === 'buyer')
+          <h4>{{($transaksi->count())}}</h4>
+          @endif 
         </div>
       </div>
     </div>
   </div>
+
+  <!-- KOTAK KE-2 PALING KIRI --> 
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="card card-statistic-1">
       <div class="card-icon bg-danger">
@@ -26,14 +43,28 @@
       </div>
       <div class="card-wrap">
         <div class="card-header">
-          <h4>News</h4>
+          @if (Auth::user()->role === 'admin')
+          <h4>Total Transaksi</h4>
+          @elseif (Auth::user()->role === 'seller')
+          <h4>Total Produk</h4>
+          @elseif (Auth::user()->role === 'buyer')
+          <h4>Total Transaksi</h4>
+          @endif 
         </div>
         <div class="card-body">
-          42
+          @if (Auth::user()->role === 'admin')
+          <h4>{{($transaksi->count())}}</h4>
+          @elseif (Auth::user()->role === 'seller')
+          <h4>{{($produk->count())}}</h4>
+          @elseif (Auth::user()->role === 'buyer')
+          <h4>{{($transaksi->count())}}</h4>
+          @endif 
         </div>
       </div>
     </div>
   </div>
+
+  <!-- KOTAK KE 3 DARI KIRI -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="card card-statistic-1">
       <div class="card-icon bg-warning">
@@ -41,14 +72,28 @@
       </div>
       <div class="card-wrap">
         <div class="card-header">
-          <h4>Reports</h4>
+          @if (Auth::user()->role === 'admin')
+          <h4>Total Produk</h4>
+          @elseif (Auth::user()->role === 'seller')
+          <h4>Total Produk</h4>
+          @elseif (Auth::user()->role === 'buyer')
+          <h4>Total Transaksi</h4>
+          @endif 
         </div>
         <div class="card-body">
-          1,201
+          @if (Auth::user()->role === 'admin')
+          <h4>{{($produk->count())}}</h4>
+          @elseif (Auth::user()->role === 'seller')
+          <h4>{{($produk->count())}}</h4>
+          @elseif (Auth::user()->role === 'buyer')
+          <h4>{{($transaksi->count())}}</h4>
+          @endif 
         </div>
       </div>
     </div>
   </div>
+
+  <!-- KOTAK KE 4 DARI KIRI -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="card card-statistic-1">
       <div class="card-icon bg-success">
@@ -56,10 +101,22 @@
       </div>
       <div class="card-wrap">
         <div class="card-header">
-          <h4>Online Users</h4>
+          @if (Auth::user()->role === 'admin')
+          <h4>Akun Penjual</h4>
+          @elseif (Auth::user()->role === 'seller')
+          <h4>Total Produk</h4>
+          @elseif (Auth::user()->role === 'buyer')
+          <h4>Total Transaksi</h4>
+          @endif 
         </div>
         <div class="card-body">
-          47
+          @if (Auth::user()->role === 'admin')
+          <h4>{{($seller->count())}}</h4>
+          @elseif (Auth::user()->role === 'seller')
+          <h4>{{($produk->count())}}</h4>
+          @elseif (Auth::user()->role === 'buyer')
+          <h4>{{($transaksi->count())}}</h4>
+          @endif 
         </div>
       </div>
     </div>
