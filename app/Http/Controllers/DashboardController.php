@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index($id)
+    public function index()
     {
         if (Auth::user()->role === 'admin') {
             $user = User::orderBy('id', 'asc');
@@ -23,6 +23,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('user','transaksi','seller','produk'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
         } else {
+            $id = Auth::user()->id;
             $user = User::orderBy('id', 'asc')->paginate(5);
             $transaksi = Transaksi::orderBy('id', 'asc')->paginate(5);
             $produk = Produk::where('penjual_id', '=', $id);
@@ -31,7 +32,29 @@ class DashboardController extends Controller
             return view('dashboard', compact('user','transaksi','seller','produk'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
         }
+        
     }
+
+    // public function index($id)
+    // {
+    //     if (Auth::user()->role === 'admin') {
+    //         $user = User::orderBy('id', 'asc');
+    //         $transaksi = Transaksi::orderBy('id', 'asc');
+    //         $produk = Produk::orderBy('id', 'asc');
+    //         $seller = Seller::orderBy('id', 'asc');
+    //         // dd($produk,$id);
+    //         return view('dashboard', compact('user','transaksi','seller','produk'))
+    //             ->with('i', (request()->input('page', 1) - 1) * 5);
+    //     } else {
+    //         $user = User::orderBy('id', 'asc')->paginate(5);
+    //         $transaksi = Transaksi::orderBy('id', 'asc')->paginate(5);
+    //         $produk = Produk::where('penjual_id', '=', $id);
+    //         $seller = Seller::where('penjual_id', '=', $id);
+    //         // dd($produk,$id);
+    //         return view('dashboard', compact('user','transaksi','seller','produk'))
+    //             ->with('i', (request()->input('page', 1) - 1) * 5);
+    //     }
+    // }
 
     // public function buyer()
     // {

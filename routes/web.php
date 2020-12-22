@@ -29,7 +29,7 @@ Route::resource('Seller', SellerController::class);
 Route::resource('Profile', SellerController::class);
 Route::resource('User', UserController::class);
 
-Route::get('dashboard/{id}', [DashboardController::class,'index'])
+Route::get('dashboard', [DashboardController::class,'index'])
     ->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

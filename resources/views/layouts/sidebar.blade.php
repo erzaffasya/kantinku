@@ -9,7 +9,7 @@
     <ul class="sidebar-menu">
       <li class="menu-header">Dashboard</li>
       <li class="nav-item dropdown">
-        <a href="{{route('dashboard',Auth::user()->id)}}" class="nav-link">
+        <a href="{{route('dashboard')}}" class="nav-link">
           <i class="fas fa-fire"></i>
           <span>Dashboard</span>
         </a>
@@ -24,7 +24,7 @@
         <ul class="dropdown-menu">
 
           @if ( Auth::user()->role === 'buyer')
-          <li><a class="nav-link" href="{{route('produk.create')}}">Produk</a></li>
+          <li><a class="nav-link" href="{{route('seller.produk.create',Auth::user()->id)}} ">Produk</a></li>
           <li><a class="nav-link" href="{{route('Seller.create')}}">Penjual</a></li>
           <li><a class="nav-link" href="{{route('Transaksi.create')}}">Form Pemesanan</a></li>
 
@@ -44,7 +44,7 @@
           {{-- <li><a class="nav-link" href="{{route('produk.index')}}">Produk</a></li> --}}
           
           @if ( Auth::user()->role === 'buyer')
-          <li><a class="nav-link" href="{{route('produk.index')}}">View Produk</a></li>   
+          <li><a class="nav-link" href="{{route('seller.produk.index', Auth::user()->id)}}">View Produk</a></li>   
           <li><a class="nav-link" href="{{route('Seller.index')}}">View Seller</a></li>   
           <li><a class="nav-link" href="{{route('Transaksi.index')}}">View Transaksi</a></li>
 
