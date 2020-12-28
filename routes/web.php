@@ -7,6 +7,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +19,9 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('page');
-})->name('page');
+// Route::get('/', function () {
+//     return view('page');
+// })->name('page');
 
 Route::resource('Buyer', BuyerController::class);
 Route::resource('seller.produk', ProdukController::class)->shallow();
@@ -31,6 +32,8 @@ Route::resource('User', UserController::class);
 
 Route::get('dashboard', [DashboardController::class,'index'])
     ->middleware(['auth'])->name('dashboard');
+
+Route::get('/', [PageController::class,'index'])->name('page');
 
 require __DIR__.'/auth.php';
 

@@ -67,7 +67,7 @@ class ProdukController extends Controller
             'harga' => $request->harga,
             'stok' => $request->stok,
             'penjual_id' => $request->penjual_id,
-            'foto'=> $request->$image_name
+            'foto'=> $image_name
         ]);
 
 

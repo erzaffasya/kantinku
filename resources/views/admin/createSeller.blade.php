@@ -37,7 +37,7 @@
 
     <div class="form-group">
       <label>Nama Toko</label>
-      <input type="text" name="nama_toko" value="Belum Bayar" class="form-control">
+      <input type="text" name="nama_toko" class="form-control">
     </div>
 
     <div class="form-group">
