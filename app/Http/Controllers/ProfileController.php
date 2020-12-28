@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Seller;
+use App\Models\Buyer;
 
 
-class SellerController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +20,17 @@ class SellerController extends Controller
 
     public function index()
     {
-        $Seller = Seller::orderBy('id','asc')->paginate(5);
-        return view('admin.Seller',compact('Seller'))
-                ->with('i',(request()->input('page',1) -1)*5);
+        if (Auth::user()->role === 'seller') {
+            $id = Auth::user()->id;
+            $profile = Seller::find($id);
+            // dd($profile,$id);
+            return view('profile', compact('profile'));
+        } else {
+            $id = Auth::user()->id;
+            $profile = Buyer::find($id);
+            // dd($profile,$id);
+            return view('profile', compact('profile'));
+        }
     }
 
     /**
@@ -43,18 +52,17 @@ class SellerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama'=>'required',
-            'jenis_kelamin'=>'required',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
             'alamat' => 'required',
-            'nama_toko'=>'required',
+            'nama_toko' => 'required',
             //'gambarseller' => 'required|image|mimes:jpg,png,jpeg'
         ]);
-        if (isset($request->image)){
+        if (isset($request->image)) {
             $extention = $request->image->extension();
-            $image_name = time().'.'.$extention;
-            $request->image->move(public_path('img\seller'),$image_name);
-            
-        }else{
+            $image_name = time() . '.' . $extention;
+            $request->image->move(public_path('img\seller'), $image_name);
+        } else {
             $image_name = null;
         }
 
@@ -64,19 +72,19 @@ class SellerController extends Controller
             'password' => Hash::make("seller123"),
             'role' => 'seller',
         ]);
-        
+
         $seller = Seller::create([
-            'id'=>$user->id,
-            'nama'=>$request->nama,
-            'jenis_kelamin'=>$request->jenis_kelamin,
+            'id' => $user->id,
+            'nama' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
-            'nama_toko'=>$request->nama_toko,
+            'nama_toko' => $request->nama_toko,
             'foto' => $image_name,
-            'user_id'=>$user->id
+            'user_id' => $user->id
         ]);
 
         return redirect()->route('admin.seller')
-                         ->with('success','Data berhasil ditambahkan');
+            ->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -115,19 +123,18 @@ class SellerController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama'=>'required',
+            'nama' => 'required',
             'jenis_kelamin' => 'required',
-            'alamat'=>'required',
+            'alamat' => 'required',
             'nama_toko' => 'required',
             'image' => 'required'
         ]);
 
-        if (isset($request->image)){
+        if (isset($request->image)) {
             $extention = $request->image->extension();
-            $image_name = time().'.'.$extention;
-            $request->image->move(public_path('img\seller'),$image_name);
-            
-        }else{
+            $image_name = time() . '.' . $extention;
+            $request->image->move(public_path('img\seller'), $image_name);
+        } else {
             $image_name = null;
         }
 
@@ -140,7 +147,7 @@ class SellerController extends Controller
         $Seller->save();
 
         return redirect()->route('Seller.index')
-                         ->with('success', 'Data berhasil diupdate');
+            ->with('success', 'Data berhasil diupdate');
     }
 
     /**
@@ -155,6 +162,6 @@ class SellerController extends Controller
         $Seller->delete();
 
         return redirect()->route('Seller.index')
-                         ->with('success', 'Data Alumni berhasil dihapus');
+            ->with('success', 'Data Alumni berhasil dihapus');
     }
 }

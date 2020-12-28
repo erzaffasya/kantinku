@@ -41,8 +41,9 @@
                 <td>{{$prdk->nama}}</td>
                 <td>{{$prdk->harga}}</td>
                 <td>{{$prdk->stok}}</td>
-                <td>
-                  <div class="badge badge-success">Active</div>
+                <td class="gallery ">
+                  <img class="gallery-item" src="{{asset('img/products/'.$prdk->foto)}}">
+                  {{-- <div class="badge badge-success">Active</div> --}}
                 </td>
                 <td>
                   <form method="post" action="{{route('produk.destroy',$prdk->id)}}">

@@ -20,7 +20,7 @@ class SellerController extends Controller
     public function index()
     {
         $Seller = Seller::orderBy('id','asc')->paginate(5);
-        return view('admin.Seller',compact('Seller'))
+        return view('admin.seller',compact('Seller'))
                 ->with('i',(request()->input('page',1) -1)*5);
     }
 
@@ -75,7 +75,7 @@ class SellerController extends Controller
             'user_id'=>$user->id
         ]);
 
-        return redirect()->route('Seller.seller')
+        return redirect()->route('Seller.index')
                          ->with('success','Data berhasil ditambahkan');
     }
 
@@ -102,7 +102,7 @@ class SellerController extends Controller
     {
         $Seller = Seller::find($id);
 
-        return view('admin.editSeller', compact('Seller'));
+        return view('Seller.index', compact('Seller'));
     }
 
     /**

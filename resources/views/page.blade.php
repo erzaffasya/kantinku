@@ -103,7 +103,7 @@
 
             <div class="order-2 md:order-3 flex items-center" id="nav-content">
 
-                <a class="inline-block no-underline hover:text-black" href="{{route('profile')}}">
+                <a class="inline-block no-underline hover:text-black" href="{{route('dashboard')}}">
                     <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <circle fill="none" cx="12" cy="7" r="3" />
                         <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
@@ -244,7 +244,7 @@ Alternatively if you want to just have a single hero
             
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <a href="#">
-                    <img class="hover:grow hover:shadow-lg" src="{{asset('img/products/'.$prdk->foto)}}">
+                    <img class="h-40 w-50 hover:grow hover:shadow-lg" src="{{asset('img/products/'.$prdk->foto)}}">
                     <div class="pt-3 flex items-center justify-between">
                         <p class="">{{$prdk->nama}}</p>
                         <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

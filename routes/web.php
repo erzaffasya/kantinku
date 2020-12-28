@@ -8,6 +8,8 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +31,8 @@ Route::resource('Transaksi', TransaksiController::class);
 Route::resource('Seller', SellerController::class);
 Route::resource('Profile', SellerController::class);
 Route::resource('User', UserController::class);
+Route::resource('User.setting', SettingController::class)->shallow();
+Route::resource('User.profile', ProfileController::class)->shallow();
 
 Route::get('dashboard', [DashboardController::class,'index'])
     ->middleware(['auth'])->name('dashboard');
