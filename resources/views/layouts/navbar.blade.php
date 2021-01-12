@@ -4,10 +4,10 @@
     <ul class="navbar-nav mr-3">
       <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
       <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
-    </ul>
+    </ul> 
   </form>
   <ul class="navbar-nav navbar-right">
-    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+    {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
       <div class="dropdown-menu dropdown-list dropdown-menu-right">
         <div class="dropdown-header">Messages
           <div class="float-right">
@@ -18,20 +18,20 @@
           <a href="#" class="dropdown-item dropdown-item-unread">
             <div class="dropdown-item-avatar">
               <img alt="image" src="{{asset('assets/img/avatar/')}}" class="rounded-circle">
-              <div class="is-online"></div>
-            </div>
-            <div class="dropdown-item-desc">
-              <b>Kusnaedi</b>
-              <p>Hello, Bro!</p>
-              <div class="time">10 Hours Ago</div>
-            </div>
-          </a>
-          <div class="dropdown-footer text-center">
-            <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-          </div>
-        </div>
-    </li>
-    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+    <div class="is-online"></div>
+    </div>
+    <div class="dropdown-item-desc">
+      <b>Kusnaedi</b>
+      <p>Hello, Bro!</p>
+      <div class="time">10 Hours Ago</div>
+    </div>
+    </a>
+    <div class="dropdown-footer text-center">
+      <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+    </div>
+    </div>
+    </li> --}}
+    {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
       <div class="dropdown-menu dropdown-list dropdown-menu-right">
         <div class="dropdown-header">Notifications
           <div class="float-right">
@@ -89,16 +89,22 @@
           <a href="#">View All <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
-    </li>
+    </li> --}}
     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
         <img alt="image" src="{{asset('img/avatar/avatar-1.png')}}" class="rounded-circle mr-1">
         <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-title">Logged in as {{Auth::user()->role}}</div>
-        <a href="{{route('User.profile.index', Auth::user()->id)}}" class="dropdown-item has-icon">
-          <i class="far fa-user"></i> Profile
-        </a>
+        
+        @if (Auth::user()->role === 'admin')
+
+        @else
+          <a href="{{route('User.profile.index', Auth::user()->id)}}" class="dropdown-item has-icon">
+            <i class="far fa-user"></i> Profile
+          </a>        
+        @endif
+
         {{-- <a href="#" class="dropdown-item has-icon">
           <i class="fas fa-bolt"></i> Activities
         </a> --}}

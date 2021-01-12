@@ -1,12 +1,10 @@
 @extends('layouts.main')
-@section('title','Dashboard')
-
 @section('body')
 <div class="row">
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
-        <h4>Selamat Datang, {{ Auth::user()->name }}</h4>
+        <h4>Laporan Transaksi</h4>
       </div>
       <div class="card-body">
         <h4>Anda Login Sebagai {{ Auth::user()->role }}</h4>
@@ -20,7 +18,7 @@
     <div class="card">
       <div class="card-header">
         <h4>
-        <a href="{{route('Transaksi.create')}}">Transaksi Table</a>
+        <a href="{{route('Transaksi.create')}}">Transaction Table</a>
         </h4>
       </div>
       <div class="card-body">
@@ -32,6 +30,7 @@
                 <th>Nama</th>
                 <th>Produk</th>
                 <th>Jumlah</th>
+                <th>Total Harga</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -41,10 +40,32 @@
                 <td>{{$tsk->nama}}</td>
                 <td>{{$tsk->produks}}</td>
                 <td>{{$tsk->jumlah}}</td>
-                <td>{{$tsk->status}}</td>
+                <td>Rp. {{$tsk->total_harga}}</td>
+                <td>
+                  @if (Auth::user()->role == 'admin')
+                    <form method="post" action="{{route('Transaksi.update',$tsk->id)}}">
+                      @csrf
+                      @method('PUT')
+                        @if ($tsk->status == 'Belum Bayar')
+                          <input name="status" value="Sudah Bayar" type="hidden">
+                          <button type="submit" class="badge badge-warning">Belum Bayar</button>                  
+                        @else
+                          <input name="status" value="Belum Bayar" type="hidden">
+                          <button type="submit" class="badge badge-success">Sudah Bayar</button>
+                        @endif
+                    </form>
+                  @else
+                      @if ($tsk->status == 'Belum Bayar')
+                        <button type="submit" class="badge badge-warning">Belum Bayar</button>                  
+                      @else
+                        <button type="submit" class="badge badge-success">Sudah Bayar</button>
+                      @endif
+                  @endif
+                </td>
                 {{-- <td>
                   <div class="badge badge-success">Active</div>
                 </td> --}}
+                @if ($tsk->status == 'Belum Bayar')
                 <td>
                   <form method="post" action="{{route('Transaksi.destroy',$tsk->id)}}">
                     @csrf
@@ -52,7 +73,10 @@
                     {{-- <a href="{{route('produk.edit',$tsk->id)}}" class="btn btn-icon icon-left btn-warning"><i class="fas fa-exclamation-triangle"></i> Edit</a> --}}
                   <button type="submit" class="btn btn-icon icon-left btn-danger"><i class="fas fa-times"></i> Delete</a> </button>
                   </form>
-                </td>
+                </td>                    
+                @endif
+                
+
               </tr>
               @endforeach
             </tbody>
@@ -60,7 +84,7 @@
         </div>
       </div>
       <div class="card-footer text-center">
-        {{-- {{ ($Transaksi->links()) }} --}}
+        {{ ($Transaksi->links()) }}
     </div>
     </div>
   </div>

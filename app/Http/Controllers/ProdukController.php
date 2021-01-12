@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Model\Seller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -114,7 +115,7 @@ class ProdukController extends Controller
             'harga' => 'required',
             'stok'=>'required',
             'penjual_id' => 'required',
-            'foto' => 'required'
+            'image' => 'required'
         ]);
 
 //Pake get image gk?
@@ -148,6 +149,10 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         $produk = Produk::find($id);
+        $image = public_path("img/products/{$produk->foto}");
+        if (File::exists($image)) {
+            unlink($image);
+        };
         $produk->delete();
 
         return redirect()->route('seller.produk.index',Auth::user()->id)

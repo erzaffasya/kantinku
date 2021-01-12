@@ -1,12 +1,11 @@
 @extends('layouts.main')
-@section('title','Dashboard')
 
 @section('body')
 <div class="row">
   <div class="col-lg-12">
     <div class="card">
       <div class="card-header">
-        <h4>Selamat Datang, {{ Auth::user()->name }}</h4>
+        <h4>Data Penjual</h4>
       </div>
       <div class="card-body">
         <h4>Anda Login Sebagai {{ Auth::user()->role }}</h4>
@@ -44,7 +43,10 @@
                 <td>{{$sell->jenis_kelamin}}</td>
                 <td>{{$sell->alamat}}</td>
                 <td>{{$sell->nama_toko}}</td>
-                <td>{{$sell->foto}}</td>
+                <td class="gallery ">
+                  <img class="gallery-item" src="{{asset('img/products/'.$sell->foto)}}">
+                  {{-- <div class="badge badge-success">Active</div> --}}
+                </td>
                 <td>
                   <div class="badge badge-success">Active</div>
                 </td>
@@ -64,7 +66,7 @@
       </div>
       <div class="card-footer text-center">
         {{ ($Seller->links()) }}
-    </div>
+      </div>
     </div>
   </div>
 </div>

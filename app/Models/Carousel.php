@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaksi extends Model
+class Carousel extends Model
 {
     use HasFactory;
-    public $table = 'transaksi'; 
+    public $table = 'carousel'; 
     protected $fillable = [
-        'pembeli_id',
-        'produk_id',
-        'jumlah',
-        'status',
-        'total_harga'
+        'nama',
+        'deskripsi',
+        'foto'
     ];
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2020 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="77mm" height="60mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 7700 6000"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <font id="FontID0" horiz-adv-x="756" font-variant="normal" style="fill-rule:nonzero" font-weight="400">
+	<font-face 
+		font-family="Algerian">
+		<font-face-src>
+			<font-face-name name="Algerian"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="K" horiz-adv-x="676" d="M23.9999 667.001l228.334 0 -67.3348 -64.5006 0 -295.333 26.0013 30.8332 0 260.501 55 53.3325 7.33219 -10.8342 -50.3332 -48.8326 0 -239.166 151.334 181c21.8334,25.9994 32.6677,49.5004 32.6677,70.3322 0,12.5018 -6.1674,24.3338 -18.5003,35.5 -12.3329,11.335 -27.3331,18.6672 -44.8336,22.3343l0 4.83375 257.333 0 0 -4.83375c-56.3318,-13.8335 -117,-59.6668 -182.167,-138.001l-67.8318 -80.6656 180.165 -350.333 82.0011 -53.1675 -253.501 0 63.9998 47.8329 -120.999 242.334 -79.6677 -97.3333 0 -139.667 79.6677 -93.1673 -250.334 0 -13.1657 13.0007 234.166 0 -62.3322 74.832 0 151.5 85.3324 104.5 -10.8323 21.4996 -100.501 -120.166 0 -151.999 58.5001 -53.1675 -223.333 0 66.834 57.1665 0 511.666 -63 58.1682zm601.5 -44.4997c-48.1668,-3.33508 -96.1666,-31.501 -143.999,-84.6684l-85.5012 -94.8329 172.334 -349.832 138.166 -93.1673 -310.5 0 -13.6665 13.0007 282.666 0 -104 70.833 -178.667 359.166 90.8339 102.668c47.499,53.1655 96.5005,82.1662 147.001,87.1669l5.33267 -10.3334z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Algerian";font-variant:normal;font-weight:normal;src:url("#FontID0") format(svg)}
+    .str0 {stroke:#6777EF;stroke-width:100;stroke-miterlimit:22.9256}
+    .fil1 {fill:#6777EF}
+    .fil0 {fill:white}
+    .fnt0 {font-weight:normal;font-size:5211.27px;font-family:'Algerian'}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <ellipse class="fil0 str0" cx="3939.11" cy="2985.24" rx="2843.76" ry="2813.58"/>
+  <text x="2166.49" y="4712.62"  class="fil1 fnt0">K</text>
+ </g>
+</svg>

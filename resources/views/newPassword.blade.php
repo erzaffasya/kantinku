@@ -42,7 +42,7 @@
                 <h4>General Settings</h4>
               </div>
               <div class="card-body">
-                <p class="text-muted">General settings such as, site title, site description, address and so on.</p>
+                <p class="text-muted">Change your password.</p>
                 <div class="form-group row align-items-center">
                   <label for="site-title" class="form-control-label col-sm-3 text-md-right">New Password</label>
                   <div class="col-sm-6 col-md-9">

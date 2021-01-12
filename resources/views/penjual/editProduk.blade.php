@@ -2,7 +2,7 @@
 @section('body')
 
 <div class="card">
-  <form method="post" action="{{route('produk.update',$produk->id)}}">
+  <form method="post" action="{{route('produk.update',$produk->id)}}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
   <div class="card-header">
@@ -34,14 +34,13 @@
    
     <div class="form-group">
         <label>Penjual ID</label>
-        <input type="hidden" name="penjual_id" value="{{Auth::User()->id}}">
-        <input type="text" value="{{Auth::User()->id}}" class="form-control currency" disabled/>
+        <input type="text" name="penjual_id" value="{{Auth::User()->id}}" class="form-control currency" readonly/>
     </div>
   
 
     <div class="form-group">
           <label>Foto Produk</label>
-          <input type="file" name="foto" value="{{$produk->foto}}" class="form-control">
+          <input type="file" name="image" value="{{$produk->foto}}" class="form-control">
         </div>
     </div>
  

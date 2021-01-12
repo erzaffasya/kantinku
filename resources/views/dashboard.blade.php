@@ -11,6 +11,7 @@
       <div class="card-icon bg-primary">
         <i class="far fa-user"></i>
       </div>
+
       <div class="card-wrap">
         <div class="card-header">
           @if (Auth::user()->role === 'admin')
@@ -31,94 +32,106 @@
           <h4>{{($transaksi->count())}}</h4>
           @endif 
         </div>
+
       </div>
+
     </div>
   </div>
 
   <!-- KOTAK KE-2 PALING KIRI --> 
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="card card-statistic-1">
-      <div class="card-icon bg-danger">
+      <div class="card-icon bg-warning">
         <i class="far fa-newspaper"></i>
       </div>
+
       <div class="card-wrap">
+
         <div class="card-header">
           @if (Auth::user()->role === 'admin')
           <h4>Total Transaksi</h4>
           @elseif (Auth::user()->role === 'seller')
-          <h4>Total Produk</h4>
+          <h4>Transaksi Berhasil</h4>
           @elseif (Auth::user()->role === 'buyer')
-          <h4>Total Transaksi</h4>
+          <h4>Belum Bayar</h4>
           @endif 
         </div>
+
         <div class="card-body">
           @if (Auth::user()->role === 'admin')
           <h4>{{($transaksi->count())}}</h4>
           @elseif (Auth::user()->role === 'seller')
-          <h4>{{($produk->count())}}</h4>
+          <h4>{{($terjual->count())}}</h4>
           @elseif (Auth::user()->role === 'buyer')
-          <h4>{{($transaksi->count())}}</h4>
+          <h4>{{($belum->count())}}</h4>
           @endif 
         </div>
+
       </div>
+
     </div>
   </div>
 
   <!-- KOTAK KE 3 DARI KIRI -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="card card-statistic-1">
-      <div class="card-icon bg-warning">
+      <div class="card-icon bg-success">
         <i class="far fa-file"></i>
       </div>
-      <div class="card-wrap">
+
+      <div class="card-wrap">        
         <div class="card-header">
           @if (Auth::user()->role === 'admin')
           <h4>Total Produk</h4>
           @elseif (Auth::user()->role === 'seller')
-          <h4>Total Produk</h4>
+          {{-- <h4>Total Produk</h4> --}}
           @elseif (Auth::user()->role === 'buyer')
-          <h4>Total Transaksi</h4>
+          <h4>Sudah Bayar</h4>
           @endif 
         </div>
+        
         <div class="card-body">
           @if (Auth::user()->role === 'admin')
           <h4>{{($produk->count())}}</h4>
           @elseif (Auth::user()->role === 'seller')
-          <h4>{{($produk->count())}}</h4>
+          {{-- <h4>{{($produk->count())}}</h4> --}}
           @elseif (Auth::user()->role === 'buyer')
-          <h4>{{($transaksi->count())}}</h4>
+          <h4>{{($sudah->count())}}</h4>
           @endif 
         </div>
       </div>
+
     </div>
   </div>
 
   <!-- KOTAK KE 4 DARI KIRI -->
   <div class="col-lg-3 col-md-6 col-sm-6 col-12">
     <div class="card card-statistic-1">
-      <div class="card-icon bg-success">
+      <div class="card-icon bg-danger">
         <i class="fas fa-circle"></i>
       </div>
+      
       <div class="card-wrap">
         <div class="card-header">
           @if (Auth::user()->role === 'admin')
           <h4>Akun Penjual</h4>
           @elseif (Auth::user()->role === 'seller')
-          <h4>Total Produk</h4>
+          {{-- <h4>Total Produk</h4> --}}
           @elseif (Auth::user()->role === 'buyer')
-          <h4>Total Transaksi</h4>
+          {{-- <h4>Total Transaksi</h4> --}}
           @endif 
         </div>
         <div class="card-body">
           @if (Auth::user()->role === 'admin')
           <h4>{{($seller->count())}}</h4>
           @elseif (Auth::user()->role === 'seller')
-          <h4>{{($produk->count())}}</h4>
+          {{-- <h4>{{($produk->count())}}</h4> --}}
           @elseif (Auth::user()->role === 'buyer')
-          <h4>{{($transaksi->count())}}</h4>
+          {{-- <h4>{{($transaksi->count())}}</h4> --}}
           @endif 
         </div>
       </div>
+      
     </div>
   </div>
 </div>

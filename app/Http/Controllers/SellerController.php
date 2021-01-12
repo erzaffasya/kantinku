@@ -102,7 +102,7 @@ class SellerController extends Controller
     {
         $Seller = Seller::find($id);
 
-        return view('Seller.index', compact('Seller'));
+        return view('admin.editSeller', compact('Seller'));
     }
 
     /**

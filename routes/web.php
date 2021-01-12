@@ -10,6 +10,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BuyController;
+use App\Http\Controllers\CarouselController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,34 +23,45 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('page');
-// })->name('page');
 
-Route::resource('Buyer', BuyerController::class);
-Route::resource('seller.produk', ProdukController::class)->shallow();
-Route::resource('Transaksi', TransaksiController::class);
-Route::resource('Seller', SellerController::class);
-Route::resource('Profile', SellerController::class);
-Route::resource('User', UserController::class);
-Route::resource('User.setting', SettingController::class)->shallow();
-Route::resource('User.profile', ProfileController::class)->shallow();
 
-Route::get('dashboard', [DashboardController::class,'index'])
-    ->middleware(['auth'])->name('dashboard');
-
-Route::get('/', [PageController::class,'index'])->name('page');
 
 require __DIR__.'/auth.php';
+Route::get('/', [PageController::class,'index'])->name('page');
 
-Route::middleware(['auth', 'PageAccess:admin,seller,buyer'])->group(function () {
-    Route::get('/profile', function () {   
-        return view('profile');
-    })->name('profile');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('dashboard', [DashboardController::class,'index'])
+    ->name('dashboard');
+    Route::resource('User.setting', SettingController::class)
+    ->shallow();
+    Route::resource('Transaksi', TransaksiController::class)
+    ->shallow();
+    Route::resource('Buyer', BuyerController::class);
+    Route::resource('Seller', SellerController::class);
+    Route::resource('Profile', SellerController::class);
+});
+
+Route::middleware(['auth', 'PageAccess:admin'])->group(function () {
+    Route::resource('User', UserController::class);
+    Route::resource('Carousel', CarouselController::class);
+});
+
+Route::middleware(['auth', 'PageAccess:seller,buyer'])->group(function () {
+    Route::resource('User.profile', ProfileController::class)
+    ->shallow();
+});
+
+Route::middleware(['auth', 'PageAccess:seller'])->group(function () {
+    Route::resource('seller.produk', ProdukController::class)
+    ->shallow();
 });
 
 Route::middleware(['auth', 'PageAccess:buyer'])->group(function () {
     Route::get('/pembeli', function () {   
         return view('pembeli.dashboard');
     })->name('pembeliDashboard');
+    Route::resource('pembeli.htransaksi', BuyController::class)
+    ->shallow();
 });

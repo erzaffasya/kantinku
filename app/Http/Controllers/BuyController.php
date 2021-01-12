@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Produk;
-use App\Model\Seller;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Auth;
-
 
 class BuyController extends Controller
 {
@@ -17,15 +17,10 @@ class BuyController extends Controller
 
     public function index($id)
     {
-        $produk = Produk::where('penjual_id','=',$id)
-        
-        
-        ->orderBy('id','asc')->paginate(5);
-        // dd($produk,$id);
-        return view('penjual.produk',compact('produk'))
-                ->with('i',(request()->input('page',1) -1)*5);
-
-        
+        $produk = Produk::where('penjual_id', '=', $id)
+            ->orderBy('id', 'asc')->paginate(5);
+        return view('pembeli.htransaksi', compact('produk'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -35,7 +30,8 @@ class BuyController extends Controller
      */
     public function create($id)
     {
-        return view('penjual.createProduk');
+        $produk = Produk::find($id);
+        return view('pembeli.htransaksi', compact('produk'));
     }
 
     /**
@@ -46,34 +42,22 @@ class BuyController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama'=>'required',
-            'stok'=>'required',
-            'harga' => 'required',
-            'penjual_id' => 'required',
-            'image' => 'required'
-        ]);
-        if (isset($request->image)){
-            $extention = $request->image->extension();
-            $image_name = time().'.'.$extention;
-            $request->image->move(public_path('img\products'),$image_name);
-            
-        }else{
-            $image_name = null;
-        }
-
-        $produk = Produk::create([
-            'nama' => $request->nama,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'penjual_id' => $request->penjual_id,
-            'foto'=> $image_name
+        $id = $request->produk_id;
+        $Transaksi = Transaksi::create([
+            'pembeli_id' => $request->pembeli_id,
+            'produk_id' => $request->produk_id,
+            'jumlah' => $request->jumlah,
+            'total_harga' => $request->total_harga,
+            'status' => "Belum Bayar",
         ]);
 
+        $produk = Produk::find($id);
+        $hasil = $produk->stok - $request->jumlah;
+        $produk->stok = $hasil;
+        $produk->save();
 
-        
-        return redirect()->route('seller.produk.index',Auth::user()->id)
-                         ->with('success','Data berhasil ditambahkan');
+        return redirect()->route('Transaksi.index', Auth::user()->id)
+            ->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -84,7 +68,6 @@ class BuyController extends Controller
      */
     public function show($id)
     {
-
     }
 
     /**
@@ -110,21 +93,20 @@ class BuyController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama'=>'required',
+            'nama' => 'required',
             'harga' => 'required',
-            'stok'=>'required',
+            'stok' => 'required',
             'penjual_id' => 'required',
             'foto' => 'required'
         ]);
 
-//Pake get image gk?
+        //Pake get image gk?
 
-        if (isset($request->image)){
+        if (isset($request->image)) {
             $extention = $request->image->extension();
-            $image_name = time().'.'.$extention;
-            $request->image->move(public_path('img\products'),$image_name);
-            
-        }else{
+            $image_name = time() . '.' . $extention;
+            $request->image->move(public_path('img\products'), $image_name);
+        } else {
             $image_name = null;
         }
         $produk = Produk::find($id);
@@ -135,8 +117,8 @@ class BuyController extends Controller
         $produk->foto = $image_name;
         $produk->save();
 
-        return redirect()->route('seller.produk.index',Auth::user()->id)
-                         ->with('success', 'Data berhasil diupdate');
+        return redirect()->route('seller.produk.index', Auth::user()->id)
+            ->with('success', 'Data berhasil diupdate');
     }
 
     /**
@@ -150,7 +132,7 @@ class BuyController extends Controller
         $produk = Produk::find($id);
         $produk->delete();
 
-        return redirect()->route('seller.produk.index',Auth::user()->id)
-                         ->with('success', 'Data Alumni berhasil dihapus');
+        return redirect()->route('seller.produk.index', Auth::user()->id)
+            ->with('success', 'Data Alumni berhasil dihapus');
     }
 }

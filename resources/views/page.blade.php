@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kantinku</title>
+    <link rel="shortcut icon" href="{{asset('img/icon.svg')}}" type="image/x-icon">
     <meta name="description" content="Free open source Tailwind CSS Store template">
     <meta name="keywords" content="tailwind,tailwindcss,tailwind css,css,starter template,free template,store template, shop layout, minimal, monochrome, minimalistic, theme, nordic">
 
@@ -75,7 +76,6 @@
             text-align: center;
             text-decoration: none;
             margin: 5px 5px;
-
             }
         .fa:hover {
             opacity: 0.7;
@@ -218,23 +218,15 @@
     </div>
 
     <!--	 
-
 Alternatively if you want to just have a single hero
-
 <section class="w-full mx-auto bg-nordic-gray-light flex pt-12 md:pt-0 md:items-center bg-cover bg-right" style="max-width:1600px; height: 32rem; background-image: url('https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">
-
 	<div class="container mx-auto">
-
 		<div class="flex flex-col w-full lg:w-1/2 justify-center items-start  px-6 tracking-wide">
 			<h1 class="text-black text-2xl my-4">Stripy Zig Zag Jigsaw Pillow and Duvet Set</h1>
 			<a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black" href="#">products</a>
-
 		</div>
-
 	  </div>
-
 </section>
-
 -->
 
     <section class="bg-white py-8">
@@ -293,7 +285,6 @@ Alternatively if you want to just have a single hero
                     <p class="pt-1 text-gray-900">Rp. 1000</p>
                 </a>
             </div>
-
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg" src="https://d2ih5qgee2kfcl.cloudfront.net/content/2020/05/29/zosYYl0/t_5ed0d66bd81ae_700.jpg">
@@ -306,7 +297,6 @@ Alternatively if you want to just have a single hero
                     <p class="pt-1 text-gray-900">Rp. 1300</p>
                 </a>
             </div>
-
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg" src="https://i.ytimg.com/vi/swQq5Kt1Svw/maxresdefault.jpg">
@@ -319,7 +309,6 @@ Alternatively if you want to just have a single hero
                     <p class="pt-1 text-gray-900">Rp. 1.500</p>
                 </a>
             </div>
-
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg" src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//83/MTA-3252250/rebo_rebo-kuaci-caramel--150-g-_full05.jpg">
@@ -332,7 +321,6 @@ Alternatively if you want to just have a single hero
                     <p class="pt-1 text-gray-900">Rp. 10.000</p>
                 </a>
             </div>
-
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg" src="https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/phut_0.jpg?itok=h30EAnkk">
@@ -345,7 +333,6 @@ Alternatively if you want to just have a single hero
                     <p class="pt-1 text-gray-900">  Rp. 50.000</p>
                 </a>
             </div>
-
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg" src="https://cdn.discordapp.com/attachments/345043603581829120/786292490936254484/photo.jpg">
@@ -358,7 +345,6 @@ Alternatively if you want to just have a single hero
                     <p class="pt-1 text-gray-900">Gratis</p>
                 </a>
             </div>
-
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <a href="#">
                     <img class="hover:grow hover:shadow-lg" src="https://cdn.discordapp.com/attachments/345043603581829120/786292579351658547/photo.jpg">

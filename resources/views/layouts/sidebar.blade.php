@@ -24,15 +24,14 @@
         <ul class="dropdown-menu">
 
           @if ( Auth::user()->role === 'buyer')
-          <li><a class="nav-link" href="{{route('seller.produk.create',Auth::user()->id)}} ">Produk</a></li>
-          <li><a class="nav-link" href="{{route('Seller.create')}}">Penjual</a></li>
-          <li><a class="nav-link" href="{{route('Transaksi.create')}}">Form Pemesanan</a></li>
+          <li><a class="nav-link" href="/">Form Pemesanan</a></li>
 
           @elseif ( Auth::user()->role === 'seller')
-          <li><a class="nav-link" href="{{route('seller.produk.create',Auth::user()->id)}}">Produk</a></li>
+          <li><a class="nav-link" href="{{route('seller.produk.create',Auth::user()->id)}}">Form Produk</a></li>
 
           @elseif ( Auth::user()->role === 'admin')
-          <li><a class="nav-link" href="{{route('Seller.create')}}">Penjual</a></li>
+          <li><a class="nav-link" href="{{route('Seller.create')}}">Form Penjual</a></li>
+          <li><a class="nav-link" href="{{route('Carousel.create')}}">Form Carousel</a></li>
           @endif
           {{-- <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li> --}}
         </ul> 
@@ -44,17 +43,16 @@
           {{-- <li><a class="nav-link" href="{{route('produk.index')}}">Produk</a></li> --}}
           
           @if ( Auth::user()->role === 'buyer')
-          <li><a class="nav-link" href="{{route('seller.produk.index', Auth::user()->id)}}">View Produk</a></li>   
-          <li><a class="nav-link" href="{{route('Seller.index')}}">View Seller</a></li>   
           <li><a class="nav-link" href="{{route('Transaksi.index')}}">View Transaksi</a></li>
 
           @elseif ( Auth::user()->role === 'seller')             
           <li><a class="nav-link" href="{{route('seller.produk.index',Auth::user()->id)}}">View Produk</a></li>   
 
           @elseif ( Auth::user()->role === 'admin') 
-          <li><a class="nav-link" href="{{route('Transaksi.index')}}">View Transaksi</a></li>
+          <li><a class="nav-link" href="{{route('Transaksi.index')}}">Konfirmasi Pembayaran</a></li>
           <li><a class="nav-link" href="{{route('Seller.index')}}">View Seller</a></li> 
-          <li><a class="nav-link" href="{{route('User.index')}}">View User</a></li>             
+          <li><a class="nav-link" href="{{route('User.index')}}">View User</a></li>      
+          <li><a class="nav-link" href="{{route('Carousel.index')}}">View Carousel</a></li>          
           @endif
  
           {{-- <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li> --}}

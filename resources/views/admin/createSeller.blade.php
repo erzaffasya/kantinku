@@ -5,7 +5,7 @@
   <form method="post" action="{{route('Seller.store')}}" enctype="multipart/form-data">
     @csrf
   <div class="card-header">
-    <h4>Form Seller</h4>
+    <h4>Form Create Seller</h4>
   </div>
 
   <div class="card-body">

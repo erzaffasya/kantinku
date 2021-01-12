@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Transaksi extends Migration
+class Carousel extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class Transaksi extends Migration
      */
     public function up()
     {
-        Schema::create('transaksi', function (Blueprint $table) {
+        Schema::create('carousel', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pembeli_id')->constrained('pembeli');
-            $table->foreignId('produk_id')->constrained('produk');
-            $table->integer('jumlah');
-            $table->enum('status', ['Sudah Bayar', 'Belum Bayar']);
-            $table->integer('total_harga');
+            $table->string('nama',30);
+            $table->string('deskripsi',255);
+            $table->string('foto',255)->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class Transaksi extends Migration
      */
     public function down()
     {
-        Schema::drop('transaksi');
+        //
     }
 }
