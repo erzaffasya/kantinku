@@ -18,7 +18,6 @@ class Pembeli extends Migration
             $table->string('nama',30);
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan'])->nullable();
             $table->string('alamat',30)->nullable();
-            $table->string('foto',255)->nullable();
             $table->foreignId('user_id')->constrained('users')->ondelete('cascade');
             $table->timestamps();
         });

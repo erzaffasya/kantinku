@@ -33,7 +33,6 @@
                 <th>Alamat</th>
                 <th>Nama Toko</th>
                 <th>Foto</th>
-                <th>Status</th>
                 <th>Action</th>
               </tr>
               @foreach ($Seller as $sell)
@@ -44,11 +43,7 @@
                 <td>{{$sell->alamat}}</td>
                 <td>{{$sell->nama_toko}}</td>
                 <td class="gallery ">
-                  <img class="gallery-item" src="{{asset('img/products/'.$sell->foto)}}">
-                  {{-- <div class="badge badge-success">Active</div> --}}
-                </td>
-                <td>
-                  <div class="badge badge-success">Active</div>
+                  <img class="gallery-item" src="{{asset('img/avatar/'.$sell->foto)}}">
                 </td>
                 <td>
                   <form method="post" action="{{route('Seller.destroy',$sell->id)}}">

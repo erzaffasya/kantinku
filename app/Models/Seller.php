@@ -15,7 +15,6 @@ class seller extends Model
         'jenis_kelamin',
         'alamat',
         'nama_toko',
-        'foto',
         'user_id'
     ];
 }

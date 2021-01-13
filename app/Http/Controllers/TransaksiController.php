@@ -48,8 +48,9 @@ class TransaksiController extends Controller
             )->join('pembeli', 'pembeli.id', '=', 'transaksi.pembeli_id')
                 ->join('produk', 'produk.id', '=', 'transaksi.produk_id')
                 ->where('transaksi.pembeli_id', '=', Auth::user()->id)
-                ->get();
+                ->paginate(5);
 
+                // dd(Auth::user()->foto);
             // orderBy('id','asc')->paginate(5);
             return view('Pembeli.Transaksi', compact('Transaksi'))
                 ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -101,9 +102,24 @@ class TransaksiController extends Controller
      */
     public function show($id)
     {
-        $Transaksi = Transaksi::select()->join('nama tabel', 'tujuan_tabel', '=', 'dari.asda')->find($id);
+        $invoice = Transaksi::select(
+            'transaksi.id',
+            'transaksi.pembeli_id',
+            'transaksi.produk_id',
+            'transaksi.jumlah',
+            'transaksi.status',
+            'transaksi.total_harga',
+            'pembeli.nama as nama',
+            'produk.nama as produks',
+            'produk.harga',
+            'pembeli.jenis_kelamin',
+            'pembeli.alamat'
 
-        return view('Transaksi.detail-profile', compact('Transaksi'));
+        )->join('pembeli', 'pembeli.id', '=', 'transaksi.pembeli_id')
+            ->join('produk', 'produk.id', '=', 'transaksi.produk_id')
+            ->find($id);
+
+        return view('pembeli.invoice', compact('invoice'));
     }
 
     /**

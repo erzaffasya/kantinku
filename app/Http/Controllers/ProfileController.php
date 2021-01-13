@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Seller;
 use App\Models\Buyer;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Collection;
 
+use function PHPUnit\Framework\isEmpty;
 
 class ProfileController extends Controller
 {
@@ -18,18 +21,47 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index($id)
     {
         if (Auth::user()->role === 'seller') {
-            $id = Auth::user()->id;
-            $profile = Seller::find($id);
+            // $id = Auth::user()->id;
+            
+            $ambilID = Seller::find($id);
+            if($ambilID === null ){
+                $user = Seller::create([
+                    'id' => Auth::user()->id,
+                    'user_id' => Auth::user()->id,
+                    ]);
+                $profile = Seller::find($id);
+                }
+            else{
+                $profile = Seller::find($id);
+            }
+
+            $user = User::find($id);
             // dd($profile,$id);
-            return view('profile', compact('profile'));
+            return view('profile', compact('profile','user'));
         } else {
-            $id = Auth::user()->id;
-            $profile = Buyer::find($id);
-            // dd($profile,$id);
-            return view('profile', compact('profile'));
+           
+            
+            // $cekID = Buyer::select('id')->find($id);
+            // $cekUser = Auth::user()->id;
+
+            $ambilID = Buyer::find($id);
+            if($ambilID === null ){
+                $user = Buyer::create([
+                    'id' => Auth::user()->id,
+                    'user_id' => Auth::user()->id,
+                    ]);
+                $profile = Buyer::find($id);
+                }
+            else{
+                $profile = Buyer::find($id);
+            }
+
+            $user = User::find($id);
+            // dd($ambilID);
+            return view('profile', compact('profile','user'));
         }
     }
 
@@ -56,7 +88,6 @@ class ProfileController extends Controller
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'nama_toko' => 'required',
-            //'gambarseller' => 'required|image|mimes:jpg,png,jpeg'
         ]);
         if (isset($request->image)) {
             $extention = $request->image->extension();
@@ -122,32 +153,69 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'required',
-            'jenis_kelamin' => 'required',
-            'alamat' => 'required',
-            'nama_toko' => 'required',
-            'image' => 'required'
-        ]);
+        if(Auth::user()->role === 'seller'){
+            $request->validate([
+                'nama' => 'required',
+                'jenis_kelamin' => 'required',
+                'alamat' => 'required',
+                'nama_toko' => 'required',
+            ]);
 
-        if (isset($request->image)) {
-            $extention = $request->image->extension();
-            $image_name = time() . '.' . $extention;
-            $request->image->move(public_path('img\seller'), $image_name);
-        } else {
-            $image_name = null;
+
+            $Seller = Seller::find($id);
+            $Seller->nama = $request->get('nama');
+            $Seller->jenis_kelamin = $request->get('jenis_kelamin');
+            $Seller->alamat = $request->get('alamat');
+            $Seller->nama_toko = $request->get('nama_toko');       
+            $Seller->save();
+            
+            $User = User::find($id);
+
+            if (isset($request->image)) {
+                $extention = $request->image->extension();
+                $image_name = time() . '.' . $extention;
+                $request->image->move(public_path('img\avatar'), $image_name);
+                
+                $User->foto = $image_name;
+            } else {
+                $image_name = null;
+            } 
+
+            $User->name = $request->get('nama');
+            $User->save();
+            return redirect()->route('User.profile.index',Auth::user()->id)
+                ->with('success', 'Data berhasil diupdate');
         }
+        else{
+            $request->validate([
+                'nama' => 'required',
+                'jenis_kelamin' => 'required',
+                'alamat' => 'required',
+            ]);
 
-        $Seller = Seller::find($id);
-        $Seller->nama = $request->get('nama');
-        $Seller->jenis_kelamin = $request->get('jenis_kelamin');
-        $Seller->alamat = $request->get('alamat');
-        $Seller->nama_toko = $request->get('nama_toko');
-        $Seller->foto = $image_name;
-        $Seller->save();
 
-        return redirect()->route('Seller.index')
-            ->with('success', 'Data berhasil diupdate');
+            $Buyer = Buyer::find($id);
+            $Buyer->nama = $request->get('nama');
+            $Buyer->jenis_kelamin = $request->get('jenis_kelamin');
+            $Buyer->alamat = $request->get('alamat');      
+            $Buyer->save();
+            $User = User::find($id);
+
+            if (isset($request->image)) {
+                $extention = $request->image->extension();
+                $image_name = time() . '.' . $extention;
+                $request->image->move(public_path('img\avatar'), $image_name);
+                
+                $User->foto = $image_name;
+            } else {
+                $image_name = null;
+            } 
+
+            $User->name = $request->get('nama');
+            $User->save();
+            return redirect()->route('User.profile.index',Auth::user()->id)
+                ->with('success', 'Data berhasil diupdate');
+        }
     }
 
     /**

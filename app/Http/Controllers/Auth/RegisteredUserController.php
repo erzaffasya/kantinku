@@ -48,7 +48,7 @@ class RegisteredUserController extends Controller
             ])
         );
 
-        $user = Buyer::create([
+        $buyer = Buyer::create([
             'id' => $user->id,
             'nama' => $request->name,
             'user_id' => $user->id,

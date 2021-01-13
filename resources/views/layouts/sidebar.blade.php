@@ -30,8 +30,9 @@
           <li><a class="nav-link" href="{{route('seller.produk.create',Auth::user()->id)}}">Form Produk</a></li>
 
           @elseif ( Auth::user()->role === 'admin')
-          <li><a class="nav-link" href="{{route('Seller.create')}}">Form Penjual</a></li>
-          <li><a class="nav-link" href="{{route('Carousel.create')}}">Form Carousel</a></li>
+          <li><a class="nav-link" href="{{route('User.create')}}">Tambah User</a></li>
+          <li><a class="nav-link" href="{{route('Seller.create')}}">Tambah Penjual</a></li>
+          <li><a class="nav-link" href="{{route('Carousel.create')}}">Tambah Carousel</a></li>
           @endif
           {{-- <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li> --}}
         </ul> 
@@ -50,9 +51,9 @@
 
           @elseif ( Auth::user()->role === 'admin') 
           <li><a class="nav-link" href="{{route('Transaksi.index')}}">Konfirmasi Pembayaran</a></li>
-          <li><a class="nav-link" href="{{route('Seller.index')}}">View Seller</a></li> 
-          <li><a class="nav-link" href="{{route('User.index')}}">View User</a></li>      
-          <li><a class="nav-link" href="{{route('Carousel.index')}}">View Carousel</a></li>          
+          <li><a class="nav-link" href="{{route('Seller.index')}}">Data Penjual</a></li> 
+          <li><a class="nav-link" href="{{route('User.index')}}">Data User</a></li>      
+          <li><a class="nav-link" href="{{route('Carousel.index')}}">Data Carousel</a></li>          
           @endif
  
           {{-- <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li> --}}

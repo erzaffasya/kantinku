@@ -19,7 +19,7 @@
     <div class="card">
       <div class="card-header">
         <h4>
-        <a href="#">User Table</a>
+        <a href="{{route('User.create')}}">User Table</a>
         </h4>
       </div>
       <div class="card-body">
@@ -32,6 +32,7 @@
                 <th>Email</th>
                 {{-- <th>Password</th> --}}
                 <th>Role</th>
+                <th>Foto</th>
                 <th>Action</th>
               </tr>
               @foreach ($User as $usr)
@@ -41,6 +42,10 @@
                 <td>{{$usr->email}}</td>
                 {{-- <td>{{$tsk->passsword}}</td> --}}
                 <td>{{$usr->role}}</td>
+                <td class="gallery ">
+                  <img class="gallery-item" src="{{asset('img/avatar/'.$usr->foto)}}">
+                  {{-- <div class="badge badge-success">Active</div> --}}
+                </td>
                 {{-- <td>
                   <div class="badge badge-success">Active</div>
                 </td> --}}

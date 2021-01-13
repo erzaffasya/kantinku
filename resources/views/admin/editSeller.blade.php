@@ -15,11 +15,16 @@
       <input type="text" name="nama" value="{{$Seller->nama}}" class="form-control">
     </div>
     
-    <div class="form-group">
+      <div class="form-group">
         <label>Jenis Kelamin</label>
-        <select name="jenis_kelamin" class="form-control"> {{$Seller->jenis_kelamin}}
-          <option>laki-laki</option>
-          <option>perempuan</option>
+        <select name="jenis_kelamin" class="form-control"> 
+          @if ($Seller->jenis_kelamin === 'laki-laki')
+            <option>laki-laki</option>  
+            <option>perempuan</option>
+          @elseif($Seller->jenis_kelamin === 'perempuan')
+            <option>perempuan</option>  
+            <option>laki-laki</option>              
+          @endif        
         </select>
       </div>
 
@@ -41,7 +46,7 @@
    
     <div class="form-group">
         <label>User ID</label>
-        <input type="text" name='user_id' value="{{$Seller->user_id}}" class="form-control currency">
+        <input type="text" name='user_id' value="{{$Seller->user_id}}" class="form-control currency" disabled>
     </div>
 
  

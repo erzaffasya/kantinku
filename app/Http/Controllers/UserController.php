@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -31,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        // return view('admin.createUser');
+        return view('admin.createUser');
     }
 
     /**
@@ -42,34 +43,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'nama'=>'required',
-        //     'email'=>'required',
-        //     'harga' => 'required',
-        //     'admin_id' => 'required',
-        //     'image' => 'required'
-        // ]);
-        // if (isset($request->image)){
-        //     $extention = $request->image->extension();
-        //     $image_name = time().'.'.$extention;
-        //     $request->image->move(public_path('img\products'),$image_name);
+
+        if (isset($request->image)){
+            $extention = $request->image->extension();
+            $image_name = time().'.'.$extention;
+            $request->image->move(public_path('img\avatar'),$image_name);
             
-        // }else{
-        //     $image_name = null;
-        // }
+        }else{
+            $image_name = null;
+        }
 
-        // $User = User::create([
-        //     'nama' => $request->nama,
-        //     'harga' => $request->harga,
-        //     'stok' => $request->stok,
-        //     'admin_id' => $request->admin_id,
-        //     'foto'=> $request->$image_name
-        // ]);
+        $User = User::create([
+            'name' => $request->nama,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+            'foto'=> $image_name,
+        ]);
 
 
-        
-        // return redirect()->route('seller.User.index',Auth::user()->id)
-        //                  ->with('success','Data berhasil ditambahkan');
+        event(new Registered($User));
+        return redirect()->route('User.index')
+                         ->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -105,16 +100,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name'=>'required',
-            'email' => 'required',
-            'password'=>'required',
-            'role' => 'required',
-        ]);
+
         $User = User::find($id);
-        $User->name = $request->get('name');
+        $User->name = $request->get('nama');
         $User->email = $request->get('email');
-        $User->password = $request->get('password');
+        $User->role = $request->get('role');
+
+        if (isset($request->password)){
+            $User->password = bcrypt($request->get('password'));
+        }
+        else{}        
+
+        if (isset($request->image)){
+            $extention = $request->image->extension();
+            $image_name = time().'.'.$extention;
+            $request->image->move(public_path('img\avatar'),$image_name);
+            
+            $User->foto = $image_name;
+        }else{}
+
         $User->save();
 
         return redirect()->route('User.index')

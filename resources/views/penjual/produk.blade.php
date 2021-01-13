@@ -39,7 +39,7 @@
               <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$prdk->nama}}</td>
-                <td>{{$prdk->harga}}</td>
+                <td>Rp. {{$prdk->harga}}</td>
                 <td>{{$prdk->stok}}</td>
                 <td class="gallery ">
                   <img class="gallery-item" src="{{asset('img/products/'.$prdk->foto)}}">

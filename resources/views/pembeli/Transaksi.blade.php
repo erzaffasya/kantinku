@@ -18,7 +18,7 @@
     <div class="card">
       <div class="card-header">
         <h4>
-        <a href="{{route('Transaksi.create')}}">Transaction Table</a>
+        <a href="{{route('page')}}">Transaction Table</a>
         </h4>
       </div>
       <div class="card-body">
@@ -62,20 +62,18 @@
                       @endif
                   @endif
                 </td>
-                {{-- <td>
-                  <div class="badge badge-success">Active</div>
-                </td> --}}
-                @if ($tsk->status == 'Belum Bayar')
                 <td>
-                  <form method="post" action="{{route('Transaksi.destroy',$tsk->id)}}">
-                    @csrf
-                    @method('DELETE') 
-                    {{-- <a href="{{route('produk.edit',$tsk->id)}}" class="btn btn-icon icon-left btn-warning"><i class="fas fa-exclamation-triangle"></i> Edit</a> --}}
-                  <button type="submit" class="btn btn-icon icon-left btn-danger"><i class="fas fa-times"></i> Delete</a> </button>
-                  </form>
-                </td>                    
-                @endif
-                
+                  <a href="{{route('Transaksi.show',$tsk->id)}}" target="_blank" class="btn btn-icon icon-left btn-warning">Invoice </a>                
+                  @if ($tsk->status == 'Belum Bayar')                  
+                    <form method="post" action="{{route('Transaksi.destroy',$tsk->id)}}">
+                      @csrf
+                      @method('DELETE') 
+                    <button type="submit" class="btn btn-icon icon-left btn-danger"></i>Delete</a> </button>                    
+                    </form>
+                  @endif
+                </td>            
+               
+
 
               </tr>
               @endforeach

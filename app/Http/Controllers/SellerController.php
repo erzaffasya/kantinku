@@ -19,7 +19,15 @@ class SellerController extends Controller
 
     public function index()
     {
-        $Seller = Seller::orderBy('id','asc')->paginate(5);
+        // $User = User::orderBy('id','asc')->paginate(5);
+        $Seller = Seller::select(
+            'penjual.id',
+            'penjual.nama',
+            'penjual.jenis_kelamin',
+            'penjual.alamat',
+            'penjual.user_id',
+            'users.foto as foto',
+        )->join('users','users.id','=','penjual.id')->orderBy('id','asc')->paginate(5);
         return view('admin.seller',compact('Seller'))
                 ->with('i',(request()->input('page',1) -1)*5);
     }
@@ -42,13 +50,7 @@ class SellerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama'=>'required',
-            'jenis_kelamin'=>'required',
-            'alamat' => 'required',
-            'nama_toko'=>'required',
-            //'gambarseller' => 'required|image|mimes:jpg,png,jpeg'
-        ]);
+ 
         if (isset($request->image)){
             $extention = $request->image->extension();
             $image_name = time().'.'.$extention;
@@ -63,6 +65,7 @@ class SellerController extends Controller
             'email' => $request->email,
             'password' => Hash::make("seller123"),
             'role' => 'seller',
+            'foto' => $image_name,
         ]);
         
         $seller = Seller::create([
@@ -71,7 +74,6 @@ class SellerController extends Controller
             'jenis_kelamin'=>$request->jenis_kelamin,
             'alamat' => $request->alamat,
             'nama_toko'=>$request->nama_toko,
-            'foto' => $image_name,
             'user_id'=>$user->id
         ]);
 
@@ -114,30 +116,24 @@ class SellerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama'=>'required',
-            'jenis_kelamin' => 'required',
-            'alamat'=>'required',
-            'nama_toko' => 'required',
-            'image' => 'required'
-        ]);
-
-        if (isset($request->image)){
-            $extention = $request->image->extension();
-            $image_name = time().'.'.$extention;
-            $request->image->move(public_path('img\avatar'),$image_name);
-            
-        }else{
-            $image_name = null;
-        }
 
         $Seller = Seller::find($id);
         $Seller->nama = $request->get('nama');
         $Seller->jenis_kelamin = $request->get('jenis_kelamin');
         $Seller->alamat = $request->get('alamat');
-        $Seller->nama_toko = $request->get('nama_toko');
-        $Seller->foto = $image_name;
+        $Seller->nama_toko = $request->get('nama_toko');        
         $Seller->save();
+
+        $User = User::find($id);
+        if (isset($request->image)){
+            $extention = $request->image->extension();
+            $image_name = time().'.'.$extention;
+            $request->image->move(public_path('img\avatar'),$image_name);
+            
+            $User->foto = $image_name;
+        }else{
+            $image_name = null;
+        }       
 
         return redirect()->route('Seller.index')
                          ->with('success', 'Data berhasil diupdate');
