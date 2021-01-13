@@ -22,25 +22,27 @@
             <img alt="image" src="{{asset('/img/avatar/'.Auth::user()->foto)}}" class="rounded-circle profile-widget-picture">
             <div class="profile-widget-items">
               <div class="profile-widget-item">
-                <div class="profile-widget-item-label">Posts</div>
-                <div class="profile-widget-item-value">187</div>
+                <div class="profile-widget-item-label">Nama</div>
+                <div class="profile-widget-item-value">{{Auth::user()->name}}</div>
               </div>
               <div class="profile-widget-item">
-                <div class="profile-widget-item-label">Followers</div>
-                <div class="profile-widget-item-value">6,8K</div>
+                <div class="profile-widget-item-label">Role</div>
+                <div class="profile-widget-item-value">{{Auth::user()->role}}</div>
               </div>
               <div class="profile-widget-item">
-                <div class="profile-widget-item-label">Following</div>
-                <div class="profile-widget-item-value">2,1K</div>
+                <div class="profile-widget-item-label">Email</div>
+                <div class="profile-widget-item-value">{{Auth::user()->email}}</div>
               </div>
             </div>
           </div>
           <div class="profile-widget-description">
             <div class="profile-widget-name">{{$profile->nama}} <div class="text-muted d-inline font-weight-normal"><div class="slash"></div>{{Auth::user()->role}}</div></div>
-            <b>{{$profile->nama}}</b> adalah seorang <b>{{$profile->jenis_kelamin}} </b>. Dia terdaftar sebagai <b>{{Auth::user()->role}}</b> di website <b>kantinku</b>, 
-            
+            <b>{{$profile->nama}}</b> adalah seorang <b>{{$profile->jenis_kelamin}}.</b> Dia terdaftar sebagai 
+            <b>{{Auth::user()->role}}</b> di website <b>kantinku</b>. 
+            @if(Auth::user()->role === 'seller')
             <b>{{$profile->nama}}</b> sekarang membuka toko bernama <b>{{$profile->nama_toko}}.</b> 
-            {{$profile->nama}} skarang tinggal di <b>{{$profile->alamat}}</b> yang terdaftar sejak <b>{{$profile->created_at}}</b>.
+            @endif
+            <b>{{$profile->nama}}</b> skarang tinggal di <b>{{$profile->alamat}}.</b> Akun ini terdaftar sejak <b>{{$profile->created_at}}</b>.
           </div>
           <div class="card-footer text-center">
             {{-- <div class="font-weight-bold mb-2">Follow Ujang On</div> --}}
@@ -118,13 +120,7 @@
                     </div>
                   </div>
                   <div class="row">
-                  <div class="form-group col-md-10 col-12">
-                    <label>Deskripsi</label>
-                    <textarea class="form-control" ></textarea>
-                    <div class="invalid-feedback">
-                      What do you wanna say?
-                    </div>
-                  </div>
+                  
                   </div>
 
                   <div class="row">
