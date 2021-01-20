@@ -109,6 +109,7 @@ class TransaksiController extends Controller
             'transaksi.jumlah',
             'transaksi.status',
             'transaksi.total_harga',
+            'transaksi.created_at',
             'pembeli.nama as nama',
             'produk.nama as produks',
             'produk.harga',

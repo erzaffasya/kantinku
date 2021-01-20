@@ -45,15 +45,13 @@
     					
     				</address>
     			</div>
-    			{{-- <div class="col-xs-6 text-right">
+    			<div class="col-xs-6 text-right">
     				<address>
-        			<strong>Data Pembeli:</strong><br>
-    					{{$invoice->nama}}<br>
-    					1234 Main<br>
-    					Apt. 4B<br>
-    					Springfield, ST 54321
+        			<strong>Tanggal Order:</strong><br>
+    					{{$invoice->created_at}}<br>
+
     				</address>
-    			</div> --}}
+    			</div>
     		</div>
     		<div class="row">
     			<div class="col-xs-6">

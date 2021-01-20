@@ -15,42 +15,42 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    
+
 
     <style>
         .worksans {
             font-family: 'Work Sans', sans-serif;
         }
-                
-        #menu-toggle:checked + #menu {
+
+        #menu-toggle:checked+#menu {
             display: block;
         }
-        
+
         .hover\:grow {
             transition: all 0.3s;
             transform: scale(1);
         }
-        
+
         .hover\:grow:hover {
             transform: scale(1.02);
         }
-        
-        .carousel-open:checked + .carousel-item {
+
+        .carousel-open:checked+.carousel-item {
             position: static;
             opacity: 100;
         }
-        
+
         .carousel-item {
             -webkit-transition: opacity 0.6s ease-out;
             transition: opacity 0.6s ease-out;
         }
-        
-        #carousel-1:checked ~ .control-1,
-        #carousel-2:checked ~ .control-2,
-        #carousel-3:checked ~ .control-3 {
+
+        #carousel-1:checked~.control-1,
+        #carousel-2:checked~.control-2,
+        #carousel-3:checked~.control-3 {
             display: block;
         }
-        
+
         .carousel-indicators {
             list-style: none;
             margin: 0;
@@ -62,13 +62,14 @@
             text-align: center;
             z-index: 10;
         }
-        
-        #carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
-        #carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
-        #carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+
+        #carousel-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
+        #carousel-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
+        #carousel-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
             color: #000;
             /*Set to match the Tailwind colour you want the active one to be */
         }
+
         .fa {
             padding: 15px;
             font-size: 30px;
@@ -76,22 +77,26 @@
             text-align: center;
             text-decoration: none;
             margin: 5px 5px;
-            }
+        }
+
         .fa:hover {
             opacity: 0.7;
-            }
+        }
+
         .fa-facebook {
             background: #3B5998;
             color: white;
-            }
+        }
+
         .fa-instagram {
             background: #e95325;
             color: white;
-            }
+        }
+
         .fa-twitter {
             background: #55ACEE;
             color: white;
-            }
+        }
     </style>
 
 </head>
@@ -211,31 +216,36 @@
                 <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
 
                     <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " style="text-align: center" href="#">
-				Store
-			</a>
+                        Store
+                    </a>
 
                     <div class="flex items-center" id="store-nav-content">
 
                     </div>
-              </div>
+                </div>
             </nav>
-           
-            @foreach ($produk as $prdk)              
-            
+            @if (COUNT($produk) === 0)
+                <H1 class="w-full text-center">PRODUK KOSONG / STOK KOSONG</H1>
+                <br>
+                <h3 class="w-full text-center">Tambah Produk Melalui Akun Penjual/Admin</h3>
+            @else
+
+            @foreach ($produk as $prdk)
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <a href="{{route('pembeli.htransaksi.create',$prdk->id)}}">
                     <img class="h-40 w-50 hover:grow hover:shadow-lg" src="{{asset('img/products/'.$prdk->foto)}}">
                     <div class="pt-3 flex items-center justify-between">
                         <p class="">{{$prdk->nama}}</p>
- 
                     </div>
                     <p class="pt-1 text-gray-900">Rp. {{$prdk->harga}}</p>
                 </a>
             </div>
             @endforeach
-            
-            </div>
+            @endif
 
+
+
+        </div>
     </section>
 
     <section class="bg-white py-8">
@@ -243,7 +253,7 @@
         <div class="container py-8 px-6 mx-auto">
 
             <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-black-800 text-xl mb-8" style="text-align: center" href="#">
-            About</a> <br>
+                About</a> <br>
             <p class="mb-8 text-gray-700" style="text-align: left">E-Kantin merupakan aplikasi berbasis web yang memberikan kemudahan konsumen khususnya mahasiswa ITK dalam melakukan pemesanan, karena tidak perlu datang untuk memesan dan kemudahan dalam melakukan pembayaran. E-kantin juga memudahkan penjual dalam mengelola pesanan dan memberikan kemudahan dalam menjalankan proses transaksi.</p>
             <p class="mb-8 text-gray-700" style="text-align: left">E-Kantin juga menyediakan bagi penjual untuk mempromosikan jualannya ketika terdapat diskon atau apapun. Promosi tersebut akan diletakkan di landing page E-Kantin ITK. Hal tersebut akan mempermudah bagi pembeli atau civitas akademika ITK yang sedang menyerbu diskon. Selain itu pembeli juga dapat lebih mudah dalam melihat dan mencari nama penjualnya.</p>
 
@@ -253,37 +263,37 @@
 
     <footer class="container mx-auto bg-white py-8 border-t border-gray-400">
         <div class="container flex px-3 py-8 ">
-           {{--<div class="w-full mx-auto flex flex-wrap">--}}
-                <div class="flex w-full lg:w-2/5 lg:justify">
-                    <div class="px-3 md:px-0">
-                        <h3 class="font-bold text-gray-900" style="text-align: center">Social Media</h3>
-                        <p class="py-4">
-                            Connect With Us On The Social Network
-                        </p>
-                        <p class="py-5" style="text-align: center">
-                            <a href="#" class="fa fa-facebook"></a>
-                            <a href="#" class="fa fa-twitter"></a>
-                            <a href="#" class="fa fa-instagram"></a>
-                        </p>
-                      
-                    </div>
-                </div>
-                <div class="flex w-full lg:w-2/6 lg:justify lg:text-center">
-                    <div class="px-3 md:px-0">
-                        <h3 class="font-bold text-gray-900" style="text-align: center">Contact Us</h3>
-                        <p class="py-6">
-                            <i class="fa fa-phone" style="font-size:36px; color: black"></i>087453569012 <br>
-                            <i class="fa fa-envelope" style="font-size:36px; color:red"></i>kantinitk@gmail.com
-                        </p>
-                    </div>
-                </div>
-                <div class="flex w-full lg:w-2/5 lg:justify lg:text-center">
-                    <div class="px-3 md:px-0">
-                        <h3 class="font-bold text-gray-900" style="text-align: center">About Us</h3>
-                        <p class="py-6">E-Kantin merupakan website untuk pemesanan makanan dan minuman di kantin ITK secara online</p>
-                    </div>
+            {{--<div class="w-full mx-auto flex flex-wrap">--}}
+            <div class="flex w-full lg:w-2/5 lg:justify">
+                <div class="px-3 md:px-0">
+                    <h3 class="font-bold text-gray-900" style="text-align: center">Social Media</h3>
+                    <p class="py-4">
+                        Connect With Us On The Social Network
+                    </p>
+                    <p class="py-5" style="text-align: center">
+                        <a href="#" class="fa fa-facebook"></a>
+                        <a href="#" class="fa fa-twitter"></a>
+                        <a href="#" class="fa fa-instagram"></a>
+                    </p>
+
                 </div>
             </div>
+            <div class="flex w-full lg:w-2/6 lg:justify lg:text-center">
+                <div class="px-3 md:px-0">
+                    <h3 class="font-bold text-gray-900" style="text-align: center">Contact Us</h3>
+                    <p class="py-6">
+                        <i class="fa fa-phone" style="font-size:36px; color: black"></i>087453569012 <br>
+                        <i class="fa fa-envelope" style="font-size:36px; color:red"></i>kantinitk@gmail.com
+                    </p>
+                </div>
+            </div>
+            <div class="flex w-full lg:w-2/5 lg:justify lg:text-center">
+                <div class="px-3 md:px-0">
+                    <h3 class="font-bold text-gray-900" style="text-align: center">About Us</h3>
+                    <p class="py-6">E-Kantin merupakan website untuk pemesanan makanan dan minuman di kantin ITK secara online</p>
+                </div>
+            </div>
+        </div>
         </div>
     </footer>
     <div class="w3-container w3-teal" style="text-align: center">

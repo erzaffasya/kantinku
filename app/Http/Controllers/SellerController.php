@@ -26,6 +26,7 @@ class SellerController extends Controller
             'penjual.jenis_kelamin',
             'penjual.alamat',
             'penjual.user_id',
+            'penjual.nama_toko',
             'users.foto as foto',
         )->join('users','users.id','=','penjual.id')->orderBy('id','asc')->paginate(5);
         return view('admin.seller',compact('Seller'))
@@ -123,18 +124,18 @@ class SellerController extends Controller
         $Seller->alamat = $request->get('alamat');
         $Seller->nama_toko = $request->get('nama_toko');        
         $Seller->save();
-
         $User = User::find($id);
-        if (isset($request->image)){
+
+        if (isset($request->image)) {
             $extention = $request->image->extension();
-            $image_name = time().'.'.$extention;
-            $request->image->move(public_path('img\avatar'),$image_name);
+            $image_name = time() . '.' . $extention;
+            $request->image->move(public_path('img\avatar'), $image_name);
             
             $User->foto = $image_name;
-        }else{
+        } else {
             $image_name = null;
-        }       
-
+        } 
+        $User->save();
         return redirect()->route('Seller.index')
                          ->with('success', 'Data berhasil diupdate');
     }
