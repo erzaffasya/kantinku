@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 use App\Models\User;
+use App\Models\Buyer;
+use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Auth\Events\Registered;
 class UserSeeder extends Seeder
 {
     /**
@@ -15,6 +17,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::insert([
+            'id' => '1',
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => hash::make('kantinku'),
@@ -22,18 +25,30 @@ class UserSeeder extends Seeder
             'foto' => 'avatar-5.png',
         ]);
         User::insert([
-            'name' => 'penjual',
-            'email' => 'penjual@gmail.com',
-            'password' => hash::make('kantinku'),
-            'role' => 'seller',
-            'foto' => 'avatar-5.png',
+                        'id' => '2',
+                        'name' => 'penjual',
+                        'email' => 'penjual@gmail.com',
+                        'password' => hash::make('kantinku'),
+                        'role' => 'seller',
+                        'foto' => 'avatar-5.png',
+        ]);
+        Seller::insert([
+            'id' => '2',
+            'nama' => 'penjual',
+            'user_id' => '2',
         ]);
         User::insert([
-            'name' => 'pembeli',
-            'email' => 'pembeli@gmail.com',
-            'password' => hash::make('kantinku'),
-            'role' => 'buyer',
-            'foto' => 'avatar-5.png',
+                        'id' => '3',
+                        'name' => 'pembeli',
+                        'email' => 'pembeli@gmail.com',
+                        'password' => hash::make('kantinku'),
+                        'role' => 'buyer',
+                        'foto' => 'avatar-5.png',
+        ]);
+        Buyer::insert([
+                'id' => '3',
+                'nama' => 'pembeli',
+                'user_id' => '3'
         ]);
     }
 }

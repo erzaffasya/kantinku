@@ -15,7 +15,7 @@ class Pembeli extends Migration
     {
         Schema::create('pembeli', function (Blueprint $table) {
             $table->id();
-            $table->string('nama',30);
+            $table->string('nama',30)->nullable();
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan'])->nullable();
             $table->string('alamat',30)->nullable();
             $table->foreignId('user_id')->constrained('users')->ondelete('cascade');

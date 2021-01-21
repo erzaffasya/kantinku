@@ -15,7 +15,7 @@ class PageController extends Controller
     public function index()
     {
             $buyer = Buyer::get();
-            $produk = Produk::where('stok','<','1')->get();
+            $produk = Produk::where('stok','>','1')->get();
             $Carousel = Carousel::get();
             return view('page', compact('produk','buyer','Carousel'));
 
